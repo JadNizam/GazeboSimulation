@@ -1,0 +1,800 @@
+<?xml version="1.0"?>
+<!--
+  Rocker-bogie suspension rover for Gazebo Harmonic.
+  
+  Total mass: 30.4 kg
+    Chassis 20.0 kg, each rocker 2.8 kg, each bogie 1.5 kg, each wheel 0.3 kg
+
+  Chassis COM at z=-0.02 (below rocker pivot) for pendulum stability.
+  
+  Kinematic tree:
+    base_link
+      left_rocker  [revolute Y, +/- 0.5 rad]
+        wheel_fl  [continuous Y]
+        left_bogie  [revolute Y, +/- 0.6 rad]
+          wheel_ml, wheel_rl
+      right_rocker  [revolute Y, +/- 0.5 rad]
+        wheel_fr  [continuous Y]
+        right_bogie  [revolute Y, +/- 0.6 rad]
+          wheel_mr, wheel_rr
+
+  No mimic joints, no closed loops. Differential bar is visual only.
+-->
+<robot name="rocker_bogie_rover_final">
+
+  <!-- Chassis -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.10" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.75 0.42 0.22"/>
+      </geometry>
+      <material name="chassis_white">
+        <color rgba="0.95 0.95 0.95 1.0"/>
+      </material>
+    </visual>
+    <!-- Front bevel -->
+    <visual>
+      <origin xyz="0.40 0 0.07" rpy="0 0.4 0"/>
+      <geometry>
+        <box size="0.08 0.42 0.16"/>
+      </geometry>
+      <material name="chassis_white"/>
+    </visual>
+    <!-- Rear bevel -->
+    <visual>
+      <origin xyz="-0.40 0 0.07" rpy="0 -0.4 0"/>
+      <geometry>
+        <box size="0.08 0.42 0.16"/>
+      </geometry>
+      <material name="chassis_white"/>
+    </visual>
+    <!-- Top equipment deck -->
+    <visual>
+      <origin xyz="0 0 0.22" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.55 0.32 0.04"/>
+      </geometry>
+      <material name="deck_dark">
+        <color rgba="0.12 0.12 0.12 1.0"/>
+      </material>
+    </visual>
+
+    <!-- Left support tower (chassis to rocker level) -->
+    <visual>
+      <origin xyz="0 0.28 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.10 0.06 0.14"/>
+      </geometry>
+      <material name="structure_grey">
+        <color rgba="0.30 0.30 0.30 1.0"/>
+      </material>
+    </visual>
+    <!-- Right support tower -->
+    <visual>
+      <origin xyz="0 -0.28 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.10 0.06 0.14"/>
+      </geometry>
+      <material name="structure_grey"/>
+    </visual>
+
+    <!-- Differential bar  -->
+    <visual>
+      <origin xyz="0 0 0.0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.028" length="0.64"/>
+      </geometry>
+      <material name="diff_orange">
+        <color rgba="1.0 0.65 0.0 1.0"/>
+      </material>
+    </visual>
+    <!-- Left bearing housing -->
+    <visual>
+      <origin xyz="0 0.30 0.0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.048" length="0.07"/>
+      </geometry>
+      <material name="bearing_dark">
+        <color rgba="0.18 0.18 0.18 1.0"/>
+      </material>
+    </visual>
+    <!-- Right bearing housing -->
+    <visual>
+      <origin xyz="0 -0.30 0.0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.048" length="0.07"/>
+      </geometry>
+      <material name="bearing_dark"/>
+    </visual>
+    <!-- Center support block -->
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.08 0.08 0.07"/>
+      </geometry>
+      <material name="support_block">
+        <color rgba="0.22 0.22 0.22 1.0"/>
+      </material>
+    </visual>
+
+
+    <collision>
+      <origin xyz="0 0 0.10" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.75 0.42 0.22"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="20.0"/>
+      <origin xyz="0 0 -0.02" rpy="0 0 0"/>
+      <inertia ixx="0.375" ixy="0.0" ixz="0.0"
+               iyy="1.019" iyz="0.0"
+               izz="1.231"/>
+    </inertial>
+  </link>
+
+
+  <!-- Left rocker -->
+  <link name="left_rocker">
+
+    <visual>
+      <origin xyz="0.15 0 -0.06" rpy="0 0.20 0"/>
+      <geometry>
+        <box size="0.44 0.07 0.055"/>
+      </geometry>
+      <material name="rocker_grey">
+        <color rgba="0.40 0.40 0.40 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.052" length="0.08"/>
+      </geometry>
+      <material name="hub_dark">
+        <color rgba="0.16 0.16 0.16 1.0"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.05 0 0.0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.046" length="0.075"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+
+    <visual>
+      <origin xyz="0.35 0 -0.15" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.038" length="0.075"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+
+    <visual>
+      <origin xyz="0.32 0 -0.10" rpy="0 1.20 0"/>
+      <geometry>
+        <box size="0.12 0.04 0.035"/>
+      </geometry>
+      <material name="rocker_grey"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0.15 0 -0.06" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.44 0.07 0.055"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="2.8"/>
+      <origin xyz="0.15 0 -0.06" rpy="0 0 0"/>
+      <inertia ixx="0.00183" ixy="0.0" ixz="0.0"
+               iyy="0.04586" iyz="0.0"
+               izz="0.04630"/>
+    </inertial>
+  </link>
+
+  <joint name="left_rocker_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="left_rocker"/>
+    <origin xyz="0 0.30 0.0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.5" upper="0.5" effort="200" velocity="1.5"/>
+    <dynamics damping="8.0" friction="2.0" spring_reference="0.0" spring_stiffness="50.0"/>
+  </joint>
+
+
+  <!-- Right rocker -->
+  <link name="right_rocker">
+    <visual>
+      <origin xyz="0.15 0 -0.06" rpy="0 0.20 0"/>
+      <geometry>
+        <box size="0.44 0.07 0.055"/>
+      </geometry>
+      <material name="rocker_grey"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.052" length="0.08"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.05 0 0.0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.046" length="0.075"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0.35 0 -0.15" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.038" length="0.075"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0.32 0 -0.10" rpy="0 1.20 0"/>
+      <geometry>
+        <box size="0.12 0.04 0.035"/>
+      </geometry>
+      <material name="rocker_grey"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0.15 0 -0.06" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.44 0.07 0.055"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="2.8"/>
+      <origin xyz="0.15 0 -0.06" rpy="0 0 0"/>
+      <inertia ixx="0.00183" ixy="0.0" ixz="0.0"
+               iyy="0.04586" iyz="0.0"
+               izz="0.04630"/>
+    </inertial>
+  </link>
+
+  <joint name="right_rocker_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="right_rocker"/>
+    <origin xyz="0 -0.30 0.0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.5" upper="0.5" effort="200" velocity="1.5"/>
+    <dynamics damping="8.0" friction="2.0" spring_reference="0.0" spring_stiffness="50.0"/>
+  </joint>
+
+
+  <!-- Left bogie -->
+  <link name="left_bogie">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.042" length="0.07"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+
+
+    <visual>
+      <origin xyz="0.025 0.016 -0.075" rpy="0 1.25 0"/>
+      <geometry>
+        <box size="0.16 0.038 0.032"/>
+      </geometry>
+      <material name="bogie_dgrey">
+        <color rgba="0.32 0.32 0.32 1.0"/>
+      </material>
+    </visual>
+
+
+    <visual>
+      <origin xyz="-0.15 0.016 -0.075" rpy="0 -0.464 0"/>
+      <geometry>
+        <box size="0.34 0.038 0.032"/>
+      </geometry>
+      <material name="bogie_dgrey"/>
+    </visual>
+
+
+    <visual>
+      <origin xyz="-0.125 0.016 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.35 0.038 0.032"/>
+      </geometry>
+      <material name="bogie_dgrey"/>
+    </visual>
+
+
+    <visual>
+      <origin xyz="0.05 0 -0.15" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.035" length="0.065"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+
+
+    <visual>
+      <origin xyz="-0.30 0 -0.15" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.035" length="0.065"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+
+
+    <visual>
+      <origin xyz="-0.08 0.016 -0.08" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.042 0.04"/>
+      </geometry>
+      <material name="support_block"/>
+    </visual>
+
+    <collision>
+      <origin xyz="-0.125 0 -0.08" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.40 0.05 0.18"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="1.5"/>
+      <origin xyz="-0.10 0 -0.10" rpy="0 0 0"/>
+      <inertia ixx="0.00313" ixy="0.0" ixz="0.0"
+               iyy="0.01813" iyz="0.0"
+               izz="0.01563"/>
+    </inertial>
+  </link>
+
+  <joint name="left_bogie_joint" type="revolute">
+    <parent link="left_rocker"/>
+    <child link="left_bogie"/>
+    <origin xyz="-0.05 0 0.0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.6" upper="0.6" effort="100" velocity="1.5"/>
+    <dynamics damping="6.0" friction="1.5"/>
+  </joint>
+
+
+  <!-- Right bogie -->
+  <link name="right_bogie">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.042" length="0.07"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+
+    <!-- Front strut -->
+    <visual>
+      <origin xyz="0.025 -0.016 -0.075" rpy="0 1.25 0"/>
+      <geometry>
+        <box size="0.16 0.038 0.032"/>
+      </geometry>
+      <material name="bogie_dgrey"/>
+    </visual>
+
+    <!-- Rear strut -->
+    <visual>
+      <origin xyz="-0.15 -0.016 -0.075" rpy="0 -0.464 0"/>
+      <geometry>
+        <box size="0.34 0.038 0.032"/>
+      </geometry>
+      <material name="bogie_dgrey"/>
+    </visual>
+
+    <!-- Bottom bar -->
+    <visual>
+      <origin xyz="-0.125 -0.016 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.35 0.038 0.032"/>
+      </geometry>
+      <material name="bogie_dgrey"/>
+    </visual>
+
+    <!-- Middle wheel hub -->
+    <visual>
+      <origin xyz="0.05 0 -0.15" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.035" length="0.065"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+
+    <!-- Rear wheel hub -->
+    <visual>
+      <origin xyz="-0.30 0 -0.15" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.035" length="0.065"/>
+      </geometry>
+      <material name="hub_dark"/>
+    </visual>
+
+    <!-- Reinforcement node -->
+    <visual>
+      <origin xyz="-0.08 -0.016 -0.08" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.042 0.04"/>
+      </geometry>
+      <material name="support_block"/>
+    </visual>
+
+    <collision>
+      <origin xyz="-0.125 0 -0.08" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.40 0.05 0.18"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="1.5"/>
+      <origin xyz="-0.10 0 -0.10" rpy="0 0 0"/>
+      <inertia ixx="0.00313" ixy="0.0" ixz="0.0"
+               iyy="0.01813" iyz="0.0"
+               izz="0.01563"/>
+    </inertial>
+  </link>
+
+  <joint name="right_bogie_joint" type="revolute">
+    <parent link="right_rocker"/>
+    <child link="right_bogie"/>
+    <origin xyz="-0.05 0 0.0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.6" upper="0.6" effort="100" velocity="1.5"/>
+    <dynamics damping="6.0" friction="1.5"/>
+  </joint>
+
+
+  <!-- Wheels (6x, radius=0.15m, width=0.09m, 0.3 kg each) -->
+
+  <!-- Front left wheel -->
+  <link name="wheel_fl">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+      <material name="tire_black"><color rgba="0.08 0.08 0.08 1.0"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.075" length="0.10"/></geometry>
+      <material name="hub_silver"><color rgba="0.55 0.55 0.55 1.0"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.035" length="0.12"/></geometry>
+      <material name="axle_color"><color rgba="0.10 0.10 0.10 1.0"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00189" ixy="0.0" ixz="0.0"
+               iyy="0.00189" iyz="0.0"
+               izz="0.00338"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_wheel_fl" type="continuous">
+    <parent link="left_rocker"/>
+    <child link="wheel_fl"/>
+    <origin xyz="0.35 0 -0.15" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.05"/>
+  </joint>
+
+  <!-- Front right wheel -->
+  <link name="wheel_fr">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+      <material name="tire_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.075" length="0.10"/></geometry>
+      <material name="hub_silver"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.035" length="0.12"/></geometry>
+      <material name="axle_color"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00189" ixy="0.0" ixz="0.0"
+               iyy="0.00189" iyz="0.0"
+               izz="0.00338"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_wheel_fr" type="continuous">
+    <parent link="right_rocker"/>
+    <child link="wheel_fr"/>
+    <origin xyz="0.35 0 -0.15" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.05"/>
+  </joint>
+
+  <!-- Middle left wheel -->
+  <link name="wheel_ml">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+      <material name="tire_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.075" length="0.10"/></geometry>
+      <material name="hub_silver"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.035" length="0.12"/></geometry>
+      <material name="axle_color"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00189" ixy="0.0" ixz="0.0"
+               iyy="0.00189" iyz="0.0"
+               izz="0.00338"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_wheel_ml" type="continuous">
+    <parent link="left_bogie"/>
+    <child link="wheel_ml"/>
+    <origin xyz="0.05 0 -0.15" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.05"/>
+  </joint>
+
+  <!-- Middle right wheel -->
+  <link name="wheel_mr">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+      <material name="tire_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.075" length="0.10"/></geometry>
+      <material name="hub_silver"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.035" length="0.12"/></geometry>
+      <material name="axle_color"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00189" ixy="0.0" ixz="0.0"
+               iyy="0.00189" iyz="0.0"
+               izz="0.00338"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_wheel_mr" type="continuous">
+    <parent link="right_bogie"/>
+    <child link="wheel_mr"/>
+    <origin xyz="0.05 0 -0.15" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.05"/>
+  </joint>
+
+  <!-- Rear left wheel -->
+  <link name="wheel_rl">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+      <material name="tire_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.075" length="0.10"/></geometry>
+      <material name="hub_silver"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.035" length="0.12"/></geometry>
+      <material name="axle_color"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00189" ixy="0.0" ixz="0.0"
+               iyy="0.00189" iyz="0.0"
+               izz="0.00338"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_wheel_rl" type="continuous">
+    <parent link="left_bogie"/>
+    <child link="wheel_rl"/>
+    <origin xyz="-0.30 0 -0.15" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.05"/>
+  </joint>
+
+  <!-- Rear right wheel -->
+  <link name="wheel_rr">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+      <material name="tire_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.075" length="0.10"/></geometry>
+      <material name="hub_silver"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.035" length="0.12"/></geometry>
+      <material name="axle_color"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.15" length="0.09"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00189" ixy="0.0" ixz="0.0"
+               iyy="0.00189" iyz="0.0"
+               izz="0.00338"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_wheel_rr" type="continuous">
+    <parent link="right_bogie"/>
+    <child link="wheel_rr"/>
+    <origin xyz="-0.30 0 -0.15" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.05"/>
+  </joint>
+
+
+  <!-- Rocker joint spring/damper -->
+  <gazebo reference="left_rocker_joint">
+    <implicitSpringDamper>1</implicitSpringDamper>
+    <springStiffness>50.0</springStiffness>
+    <springReference>0.0</springReference>
+  </gazebo>
+  <gazebo reference="right_rocker_joint">
+    <implicitSpringDamper>1</implicitSpringDamper>
+    <springStiffness>50.0</springStiffness>
+    <springReference>0.0</springReference>
+  </gazebo>
+
+  <!-- Gazebo materials -->
+  <gazebo reference="base_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+  <gazebo reference="left_rocker">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="right_rocker">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="left_bogie">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="right_bogie">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="wheel_fl">
+    <material>Gazebo/FlatBlack</material>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+  </gazebo>
+  <gazebo reference="wheel_fr">
+    <material>Gazebo/FlatBlack</material>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+  </gazebo>
+  <gazebo reference="wheel_ml">
+    <material>Gazebo/FlatBlack</material>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+  </gazebo>
+  <gazebo reference="wheel_mr">
+    <material>Gazebo/FlatBlack</material>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+  </gazebo>
+  <gazebo reference="wheel_rl">
+    <material>Gazebo/FlatBlack</material>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+  </gazebo>
+  <gazebo reference="wheel_rr">
+    <material>Gazebo/FlatBlack</material>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+  </gazebo>
+
+
+  <!-- Diff drive plugin -->
+  <gazebo>
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+
+      <left_joint>joint_wheel_fl</left_joint>
+      <left_joint>joint_wheel_ml</left_joint>
+      <left_joint>joint_wheel_rl</left_joint>
+      <right_joint>joint_wheel_fr</right_joint>
+      <right_joint>joint_wheel_mr</right_joint>
+      <right_joint>joint_wheel_rr</right_joint>
+
+      <wheel_separation>0.60</wheel_separation>
+      <wheel_radius>0.15</wheel_radius>
+
+      <max_linear_acceleration>1.0</max_linear_acceleration>
+      <max_angular_acceleration>2.0</max_angular_acceleration>
+      <max_velocity>2.0</max_velocity>
+
+      <topic>cmd_vel</topic>
+      <odom_topic>odom</odom_topic>
+
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+
+    </plugin>
+  </gazebo>
+
+</robot>
