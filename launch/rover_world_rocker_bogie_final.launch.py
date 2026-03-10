@@ -10,12 +10,13 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
     
-    # Get the current directory
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    
+    # launch/ is one level below project root
+    current_dir  = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.join(current_dir, '..')
+
     # Path to URDF and world files
-    urdf_file = os.path.join(current_dir, 'rocker_bogie_rover_final.urdf')
-    world_file = os.path.join(current_dir, 'worlds', 'flat.sdf')
+    urdf_file  = os.path.join(project_root, 'urdf', 'rocker_bogie_rover_final.urdf')
+    world_file = os.path.join(project_root, 'worlds', 'flat.sdf')
     
     # Read URDF file
     with open(urdf_file, 'r') as f:

@@ -9,13 +9,14 @@ import os
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     
+    # launch/ is one level below project root
     if os.path.exists('/mnt/c/Users'):
         world_file_path = '/mnt/c/Users/jadni/Desktop/GazeboSimulation/worlds/flat.sdf'
-        robot_file_path = '/mnt/c/Users/jadni/Desktop/GazeboSimulation/simple_rover.urdf'
+        robot_file_path = '/mnt/c/Users/jadni/Desktop/GazeboSimulation/urdf/simple_rover.urdf'
     else:
         home_dir = os.path.expanduser('~')
         world_file_path = os.path.join(home_dir, 'Desktop', 'GazeboSimulation', 'worlds', 'flat.sdf')
-        robot_file_path = os.path.join(home_dir, 'Desktop', 'GazeboSimulation', 'simple_rover.urdf')
+        robot_file_path = os.path.join(home_dir, 'Desktop', 'GazeboSimulation', 'urdf', 'simple_rover.urdf')
     
     world_arg = DeclareLaunchArgument(
         'world',

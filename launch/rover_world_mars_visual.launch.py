@@ -7,9 +7,11 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    urdf_file   = os.path.join(current_dir, 'rocker_bogie_rover_visual.urdf')
-    world_file  = os.path.join(current_dir, 'worlds', 'mars_test_world.world')
+    # launch/ is one level below project root
+    current_dir  = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.join(current_dir, '..')
+    urdf_file    = os.path.join(project_root, 'urdf', 'rocker_bogie_rover_visual.urdf')
+    world_file   = os.path.join(project_root, 'worlds', 'mars_test_world.world')
 
     with open(urdf_file, 'r') as f:
         robot_desc = f.read()

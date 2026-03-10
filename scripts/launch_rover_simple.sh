@@ -14,4 +14,4 @@ unset __NV_PRIME_RENDER_OFFLOAD
 
 echo "Launching simple rover..."
 
-ros2 launch /mnt/c/Users/jadni/Desktop/GazeboSimulation/rover_world_simple.launch.py
+ros2 launch /mnt/c/Users/jadni/Desktop/GazeboSimulation/launch/rover_world_simple.launch.py
