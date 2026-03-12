@@ -34,9 +34,24 @@ bash scripts/launch_rover_rocker_bogie_final.sh
 bash scripts/launch_rover_simple.sh
 ```
 
+## LiDAR Test Pipeline
+
+Launches Gazebo, bridges the LiDAR scan topic, and opens RViz in one command.
+
+```bash
+bash scripts/run_lidar_test.sh
+```
+
+RViz will open with a `LaserScan` display subscribed to `/scan`, fixed frame `base_link`. Drive the rover near obstacles to see live scan data.
+
+Verify the topic is streaming:
+```bash
+ros2 topic echo /scan
+```
+
 ## Requirements
 
 - ROS 2 Jazzy
 - Gazebo Harmonic (`gz-sim`)
-- `ros_gz_sim`, `ros_gz_bridge`, `robot_state_publisher`
+- `ros_gz_sim`, `ros_gz_bridge`, `robot_state_publisher`, `rviz2`
 - WSL 2 (Windows) with software rendering (`LIBGL_ALWAYS_SOFTWARE=1`)
