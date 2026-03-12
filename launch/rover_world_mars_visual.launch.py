@@ -59,10 +59,18 @@ def generate_launch_description():
         output='screen'
     )
 
+    bridge_scan = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan'],
+        output='screen'
+    )
+
     return LaunchDescription([
         robot_state_publisher,
         gazebo,
         spawn_robot,
         bridge_cmd_vel,
         bridge_odom,
+        bridge_scan,
     ])
