@@ -2,7 +2,8 @@
 
 import os
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess
+from launch.actions import ExecuteProcess, IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
 def generate_launch_description():
@@ -66,6 +67,20 @@ def generate_launch_description():
         output='screen'
     )
 
+    bridge_imu = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/imu/data@sensor_msgs/msg/Imu@gz.msgs.IMU'],
+        output='screen'
+    )
+
+    # State estimation (EKF fusing odom + IMU)
+    state_estimation = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(current_dir, 'state_estimation.launch.py')
+        )
+    )
+
     return LaunchDescription([
         robot_state_publisher,
         gazebo,
@@ -73,4 +88,6 @@ def generate_launch_description():
         bridge_cmd_vel,
         bridge_odom,
         bridge_scan,
+        bridge_imu,
+        state_estimation,
     ])

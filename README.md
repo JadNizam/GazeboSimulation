@@ -34,6 +34,18 @@ bash scripts/launch_rover_rocker_bogie_final.sh
 bash scripts/launch_rover_simple.sh
 ```
 
+## State Estimation
+
+The rover fuses wheel odometry (`/odom`) and IMU data (`/imu/data`) through a robot_localization EKF node. It runs automatically when launching the simulation.
+
+Verify filtered odometry is publishing:
+```bash
+ros2 topic list | grep filtered
+ros2 topic echo /odometry/filtered
+```
+
+EKF config: `config/ekf.yaml`
+
 ## LiDAR Test Pipeline
 
 Launches Gazebo, bridges the LiDAR scan topic, and opens RViz in one command.
