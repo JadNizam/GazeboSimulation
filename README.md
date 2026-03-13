@@ -61,6 +61,39 @@ Verify the topic is streaming:
 ros2 topic echo /scan
 ```
 
+## SLAM Mapping
+
+To build a real-time map of the environment using SLAM Toolbox, launch the mapping pipeline:
+
+```bash
+ros2 launch launch/slam_mapping.launch.py
+```
+
+This will automatically start the rover simulation, state estimation, SLAM Toolbox, and RViz configured with map and LiDAR visualization. 
+
+Expected topics:
+- `/scan`
+- `/odometry/filtered`
+- `/map`
+- `/map_metadata`
+
+Drive the rover around to generate the continuous occupancy grid in RViz.
+
+## Full Autonomy Pipeline
+
+To run the complete system including Gazebo simulation, LiDAR bridge, state estimation, SLAM mapping, and RViz in a single command:
+
+```bash
+ros2 launch launch/full_autonomy.launch.py
+```
+
+This will:
+1. Start Gazebo with the visual Mars rover
+2. Bridge the `/scan` LiDAR data to ROS2
+3. Run the EKF state estimation (`/odometry/filtered`)
+4. Start SLAM Toolbox
+5. Open RViz with live LiDAR scans and the evolving map.
+
 ## Requirements
 
 - ROS 2 Jazzy

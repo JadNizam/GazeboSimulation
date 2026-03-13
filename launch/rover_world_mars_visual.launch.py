@@ -70,7 +70,17 @@ def generate_launch_description():
     bridge_imu = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/imu/data@sensor_msgs/msg/Imu@gz.msgs.IMU'],
+        arguments=['/imu@sensor_msgs/msg/Imu@gz.msgs.IMU'],
+        output='screen'
+    )
+
+    bridge_joint_states = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/world/mars_test_world/model/rocker_bogie_rover_visual/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model'],
+        remappings=[
+            ('/world/mars_test_world/model/rocker_bogie_rover_visual/joint_state', '/joint_states')
+        ],
         output='screen'
     )
 
@@ -89,5 +99,6 @@ def generate_launch_description():
         bridge_odom,
         bridge_scan,
         bridge_imu,
+        bridge_joint_states,
         state_estimation,
     ])
