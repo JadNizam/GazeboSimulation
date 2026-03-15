@@ -40,7 +40,7 @@ def generate_launch_description():
         executable='create',
         arguments=[
             '-name', 'rocker_bogie_rover_visual',
-            '-file', urdf_file,
+            '-string', robot_desc,
             '-x', '0.0',
             '-y', '0.0',
             '-z', '0.32',
@@ -51,7 +51,7 @@ def generate_launch_description():
     bridge_cmd_vel = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist'],
+        arguments=['/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist'],
         output='screen'
     )
 
