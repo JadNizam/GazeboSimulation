@@ -40,7 +40,7 @@ def generate_launch_description():
         executable='create',
         arguments=[
             '-name', 'rocker_bogie_rover_visual',
-            '-topic', 'robot_description',
+            '-file', urdf_file,
             '-x', '0.0',
             '-y', '0.0',
             '-z', '0.32',

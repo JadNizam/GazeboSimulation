@@ -1356,15 +1356,15 @@
   <!-- LiDAR sensor (gz-sim gpu_lidar, 360°, 20 m range) -->
   <gazebo reference="lidar_link">
     <sensor name="lidar" type="gpu_lidar">
-      <update_rate>10</update_rate>
+      <update_rate>8</update_rate>
       <always_on>true</always_on>
       <visualize>false</visualize>
       <topic>/scan</topic>
       <gz_frame_id>lidar_link</gz_frame_id>
-      <lidar>
+      <ray>
         <scan>
           <horizontal>
-            <samples>720</samples>
+            <samples>360</samples>
             <resolution>1</resolution>
             <min_angle>-3.14159</min_angle>
             <max_angle>3.14159</max_angle>
@@ -1380,7 +1380,7 @@
           <mean>0.0</mean>
           <stddev>0.01</stddev>
         </noise>
-      </lidar>
+      </ray>
     </sensor>
   </gazebo>
 

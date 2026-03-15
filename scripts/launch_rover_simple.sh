@@ -6,11 +6,11 @@ source install/setup.bash
 
 export GZ_SIM_RESOURCE_PATH=${GZ_SIM_RESOURCE_PATH}:${HOME}/ros2_ws/install/rover_description/share
 
-# Software rendering for WSL2
-export LIBGL_ALWAYS_SOFTWARE=1
-export GALLIUM_DRIVER=llvmpipe
-unset __GLX_VENDOR_LIBRARY_NAME
-unset __NV_PRIME_RENDER_OFFLOAD
+# Allow GPU acceleration
+# export LIBGL_ALWAYS_SOFTWARE=1
+# export GALLIUM_DRIVER=llvmpipe
+# unset __GLX_VENDOR_LIBRARY_NAME
+# unset __NV_PRIME_RENDER_OFFLOAD
 
 echo "Launching simple rover..."
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export LIBGL_ALWAYS_SOFTWARE=1
-export GALLIUM_DRIVER=llvmpipe
+# Allow GPU acceleration
+# export GALLIUM_DRIVER=llvmpipe
 
 source /opt/ros/jazzy/setup.bash
 
