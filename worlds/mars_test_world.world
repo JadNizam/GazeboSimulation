@@ -2156,5 +2156,88 @@
       </link>
     </model>
 
+    <!-- SLAM Features: Low walls -->
+    <model name="slam_low_wall_1">
+      <static>true</static>
+      <pose>5 -8 0.5 0 0 0.5</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>5.0 0.3 1.0</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>5.0 0.3 1.0</size></box></geometry>
+          <material><ambient>0.6 0.6 0.6 1</ambient><diffuse>0.6 0.6 0.6 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    <model name="slam_low_wall_2">
+      <static>true</static>
+      <pose>-7 6 0.5 0 0 -0.8</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>4.0 0.3 1.0</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>4.0 0.3 1.0</size></box></geometry>
+          <material><ambient>0.6 0.6 0.6 1</ambient><diffuse>0.6 0.6 0.6 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- SLAM Features: Vertical Pillars -->
+    <model name="slam_pillar_1">
+      <static>true</static>
+      <pose>3 4 1.5 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><cylinder><radius>0.4</radius><length>3.0</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>0.4</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0.5 0.3 0.1 1</ambient><diffuse>0.7 0.4 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    <model name="slam_pillar_2">
+      <static>true</static>
+      <pose>-4 -5 1.5 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><cylinder><radius>0.3</radius><length>3.0</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>0.3</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0.5 0.3 0.1 1</ambient><diffuse>0.7 0.4 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    <model name="slam_pillar_3">
+      <static>true</static>
+      <pose>8 -3 1.5 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><cylinder><radius>0.5</radius><length>3.0</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>0.5</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0.5 0.3 0.1 1</ambient><diffuse>0.7 0.4 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- SLAM Features: Rock clusters & uneven obstacles -->
+    <model name="slam_rock_cluster">
+      <static>true</static>
+      <pose>-2 -2 0.4 0.1 0.2 0.3</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>1.5 1.2 0.8</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>1.5 1.2 0.8</size></box></geometry>
+          <material><ambient>0.4 0.3 0.2 1</ambient><diffuse>0.5 0.4 0.3 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    <model name="slam_uneven_terrain_bump">
+      <static>true</static>
+      <pose>6 6 0.2 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>1.5</radius></sphere></geometry></collision>
+        <visual name="vis">
+          <geometry><sphere><radius>1.5</radius></sphere></geometry>
+          <material><ambient>0.4 0.2 0.1 1</ambient><diffuse>0.6 0.3 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
   </world>
 </sdf>
