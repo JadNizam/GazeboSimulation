@@ -14,6 +14,8 @@ def generate_launch_description():
     urdf_file    = os.path.join(project_root, 'urdf', 'rocker_bogie_rover_visual.urdf')
     world_file   = os.path.join(project_root, 'worlds', 'mars_test_world.world')
 
+    gui_config   = os.path.join(project_root, 'config', 'gui.config')
+
     with open(urdf_file, 'r') as f:
         robot_desc = f.read()
 
@@ -29,7 +31,7 @@ def generate_launch_description():
     )
 
     gazebo = ExecuteProcess(
-        cmd=['gz', 'sim', world_file, '-r'],
+        cmd=['gz', 'sim', world_file, '-r', '--gui-config', gui_config],
         output='screen'
     )
 

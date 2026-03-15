@@ -18,10 +18,12 @@ def generate_launch_description():
     urdf_file  = os.path.join(project_root, 'urdf', 'rocker_bogie_rover_final.urdf')
     world_file = os.path.join(project_root, 'worlds', 'flat.sdf')
     
+    gui_config = os.path.join(project_root, 'config', 'gui.config')
+
     # Read URDF file
     with open(urdf_file, 'r') as f:
         robot_desc = f.read()
-    
+
     robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -32,9 +34,9 @@ def generate_launch_description():
             {'use_sim_time': True}
         ]
     )
-    
+
     gazebo = ExecuteProcess(
-        cmd=['gz', 'sim', world_file, '-r'],
+        cmd=['gz', 'sim', world_file, '-r', '--gui-config', gui_config],
         output='screen'
     )
     

@@ -40,7 +40,7 @@ def generate_launch_description():
             'gz_sim.launch.py'
         ]),
         launch_arguments={
-            'gz_args': [world_file, ' -r -v 1']
+            'gz_args': [world_file, ' -r -v 1 --gui-config ', os.path.join(os.path.dirname(world_file_path), '..', 'config', 'gui.config')]
         }.items()
     )
 
