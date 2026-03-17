@@ -12,7 +12,7 @@ def generate_launch_description():
     current_dir  = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.join(current_dir, '..')
     urdf_file    = os.path.join(project_root, 'urdf', 'rocker_bogie_rover_visual.urdf')
-    world_file   = os.path.join(project_root, 'worlds', 'mars_test_world.world')
+    world_file   = os.path.join(project_root, 'worlds', 'mars_world_full.sdf')
 
     gui_config   = os.path.join(project_root, 'config', 'gui.config')
 
