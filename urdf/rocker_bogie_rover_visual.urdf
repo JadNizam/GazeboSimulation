@@ -1405,8 +1405,11 @@
       <wheel_radius>0.15</wheel_radius>
 
       <topic>/cmd_vel</topic>
-      <max_linear_acceleration>50.0</max_linear_acceleration>
-      <max_angular_acceleration>50.0</max_angular_acceleration>
+      <update_rate>50</update_rate>
+      <cmd_vel_timeout>0.1</cmd_vel_timeout>
+      <max_acceleration>5.0</max_acceleration>
+      <max_linear_acceleration>5.0</max_linear_acceleration>
+      <max_angular_acceleration>5.0</max_angular_acceleration>
       <max_velocity>3.0</max_velocity>
       <odom_topic>odom</odom_topic>
 
