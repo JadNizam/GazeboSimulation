@@ -4,6 +4,8 @@ slam_toolbox:
     odom_frame: odom
     map_frame: map
     base_frame: base_link
+    provide_odom_frame: true
+    publish_tf: true
     scan_topic: /scan
     mode: mapping
     # Minimal parameters to get started

@@ -62,6 +62,13 @@ def generate_launch_description():
         output='screen'
     )
 
+    bridge_tf = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V'],
+        output='screen'
+    )
+
     bridge_scan = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -99,6 +106,7 @@ def generate_launch_description():
         spawn_robot,
         bridge_cmd_vel,
         bridge_odom,
+        bridge_tf,
         bridge_scan,
         bridge_imu,
         bridge_joint_states,
