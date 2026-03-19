@@ -55,7 +55,7 @@ def generate_launch_description():
             '-string', robot_desc,
             '-x', '0.0',
             '-y', '0.0',
-            '-z', '0.2',
+            '-z', '0.32',
             '-Y', '0.0'
         ],
         output='screen'
