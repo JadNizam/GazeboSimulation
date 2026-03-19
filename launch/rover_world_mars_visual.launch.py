@@ -35,6 +35,18 @@ def generate_launch_description():
         output='screen'
     )
 
+    # Automatically delete any lingering instance of the rover before spawning a new one
+    delete_robot = ExecuteProcess(
+        cmd=[
+            'gz', 'service', '-s', '/world/mars_test_world/remove',
+            '--reqtype', 'gz.msgs.Entity',
+            '--reptype', 'gz.msgs.Boolean',
+            '--timeout', '1000',
+            '--req', 'name: "rocker_bogie_rover_visual", type: 2'
+        ],
+        output='log'
+    )
+
     spawn_robot = Node(
         package='ros_gz_sim',
         executable='create',
@@ -43,7 +55,8 @@ def generate_launch_description():
             '-string', robot_desc,
             '-x', '0.0',
             '-y', '0.0',
-            '-z', '0.32',
+            '-z', '0.2',
+            '-Y', '0.0'
         ],
         output='screen'
     )
@@ -103,6 +116,7 @@ def generate_launch_description():
     return LaunchDescription([
         robot_state_publisher,
         gazebo,
+        delete_robot,
         spawn_robot,
         bridge_cmd_vel,
         bridge_odom,
