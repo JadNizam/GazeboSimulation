@@ -15,6 +15,13 @@ def generate_launch_description():
         )
     )
 
+    # 1.5 Launch state estimation (EKF for odom -> base_link)
+    ekf_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_dir, 'launch', 'state_estimation.launch.py')
+        )
+    )
+
     # 2. Launch SLAM Toolbox
     slam_toolbox_node = Node(
         package='slam_toolbox',
@@ -37,8 +44,17 @@ def generate_launch_description():
         parameters=[{'use_sim_time': True}]
     )
 
+    # 4. Launch Nav2 Stack
+    nav2_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_dir, 'launch', 'nav2.launch.py')
+        )
+    )
+
     return LaunchDescription([
         sim_launch,
+        ekf_launch,
         slam_toolbox_node,
+        nav2_launch,
         rviz_node
     ])
