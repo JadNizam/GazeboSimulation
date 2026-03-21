@@ -34,12 +34,12 @@ def generate_launch_description():
         ]
     )
 
-    # 3. Launch RViz
+    # 3. Launch RViz (with new Nav2 specific config)
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        arguments=['-d', os.path.join(pkg_dir, 'config', 'slam_view.rviz')],
+        arguments=['-d', os.path.join(pkg_dir, 'config', 'nav2_view.rviz')],
         output='screen',
         parameters=[{'use_sim_time': True}]
     )

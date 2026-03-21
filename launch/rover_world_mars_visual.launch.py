@@ -106,6 +106,13 @@ def generate_launch_description():
         output='screen'
     )
 
+    bridge_clock = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        output='screen'
+    )
+
     # State estimation (EKF fusing odom + IMU)
     state_estimation = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -124,5 +131,6 @@ def generate_launch_description():
         bridge_scan,
         bridge_imu,
         bridge_joint_states,
+        bridge_clock,
         state_estimation,
     ])
