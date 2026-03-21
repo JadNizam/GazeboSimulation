@@ -29,8 +29,12 @@ def generate_launch_description():
     # Note: We omit map_server & AMCL since we rely on SLAM Toolbox for map -> odom
     nav2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(nav2_bringup_dir, 'launch', 'navigation_launch.py')),
-        launch_arguments={'use_sim_time': use_sim_time,
-                          'params_file': params_file}.items())
+        launch_arguments={
+            'use_sim_time': use_sim_time,
+            'params_file': params_file,
+            'autostart': 'True',
+            'use_collision_monitor': 'False'
+        }.items())
 
     return LaunchDescription([
         declare_use_sim_time_cmd,
