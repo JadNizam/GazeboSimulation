@@ -1431,7 +1431,17 @@
   </gazebo>
   <gazebo>
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
-      <update_rate>30</update_rate>
+      <update_rate>100</update_rate>
+      <joint_name>left_rocker_joint</joint_name>
+      <joint_name>right_rocker_joint</joint_name>
+      <joint_name>left_bogie_joint</joint_name>
+      <joint_name>right_bogie_joint</joint_name>
+      <joint_name>joint_wheel_fl</joint_name>
+      <joint_name>joint_wheel_fr</joint_name>
+      <joint_name>joint_wheel_ml</joint_name>
+      <joint_name>joint_wheel_mr</joint_name>
+      <joint_name>joint_wheel_rl</joint_name>
+      <joint_name>joint_wheel_rr</joint_name>
     </plugin>
   </gazebo>
   <gazebo>
@@ -1445,7 +1455,7 @@
       <wheel_separation>0.60</wheel_separation>
       <wheel_radius>0.15</wheel_radius>
       <topic>/cmd_vel</topic>
-      <update_rate>50</update_rate>
+      <update_rate>100</update_rate>
       <cmd_vel_timeout>0.1</cmd_vel_timeout>
       <max_acceleration>5.0</max_acceleration>
       <max_linear_acceleration>5.0</max_linear_acceleration>
@@ -1453,7 +1463,7 @@
       <max_velocity>3.0</max_velocity>
       <odom_topic>/odom</odom_topic>
       <tf_topic>/tf</tf_topic>
-      <odom_publish_frequency>30</odom_publish_frequency>
+      <odom_publish_frequency>100</odom_publish_frequency>
       <odom_frame>odom</odom_frame>
       <robot_base_frame>base_link</robot_base_frame>
       <publish_odom>true</publish_odom>
