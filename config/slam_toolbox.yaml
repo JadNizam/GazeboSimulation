@@ -4,7 +4,7 @@ slam_toolbox:
     odom_frame: odom
     map_frame: map
     base_frame: base_link
-    provide_odom_frame: true
+    provide_odom_frame: false
     publish_tf: true
     scan_topic: /scan
     mode: mapping

@@ -12,7 +12,10 @@ def generate_launch_description():
     sim_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_dir, 'launch', 'rover_world_mars_visual.launch.py')
-        )
+        ),
+        launch_arguments={
+            'use_sim_time': 'true'
+        }.items()
     )
 
     # 2. Launch SLAM Toolbox properly managed
@@ -22,7 +25,8 @@ def generate_launch_description():
         ),
         launch_arguments={
             'use_sim_time': 'true',
-            'slam_params_file': os.path.join(pkg_dir, 'config', 'slam_toolbox.yaml')
+            'slam_params_file': os.path.join(pkg_dir, 'config', 'slam_toolbox.yaml'),
+            'params_file': os.path.join(pkg_dir, 'config', 'slam_toolbox.yaml')
         }.items()
     )
 
@@ -45,7 +49,10 @@ def generate_launch_description():
     nav2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_dir, 'launch', 'nav2.launch.py')
-        )
+        ),
+        launch_arguments={
+            'use_sim_time': 'true'
+        }.items()
     )
 
     return LaunchDescription([
