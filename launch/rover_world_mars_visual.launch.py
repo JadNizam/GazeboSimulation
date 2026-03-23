@@ -24,10 +24,11 @@ def generate_launch_description():
         executable='robot_state_publisher',
         name='robot_state_publisher',
         output='screen',
-        parameters=[
-            {'robot_description': robot_desc},
-            {'use_sim_time': True}
-        ]
+        parameters=[{
+            'robot_description': robot_desc,
+            'use_sim_time': True,
+            'publish_frequency': 100.0
+        }]
     )
 
     gazebo = ExecuteProcess(
@@ -62,51 +63,18 @@ def generate_launch_description():
     )
 
 
-    bridge_cmd_vel = Node(
+    bridge_all = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
         parameters=[{'use_sim_time': True}],
-        arguments=['/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist'],
-        output='screen'
-    )
-
-    bridge_odom = Node(
-        package='ros_gz_bridge',
-        executable='parameter_bridge',
-        parameters=[{'use_sim_time': True}],
-        arguments=['/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry'],
-        output='screen'
-    )
-
-    bridge_tf = Node(
-        package='ros_gz_bridge',
-        executable='parameter_bridge',
-        parameters=[{'use_sim_time': True}],
-        arguments=['/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V'],
-        output='screen'
-    )
-
-    bridge_scan = Node(
-        package='ros_gz_bridge',
-        executable='parameter_bridge',
-        parameters=[{'use_sim_time': True}],
-        arguments=['/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'],
-        output='screen'
-    )
-
-    bridge_imu = Node(
-        package='ros_gz_bridge',
-        executable='parameter_bridge',
-        parameters=[{'use_sim_time': True}],
-        arguments=['/imu@sensor_msgs/msg/Imu@gz.msgs.IMU'],
-        output='screen'
-    )
-
-    bridge_joint_states = Node(
-        package='ros_gz_bridge',
-        executable='parameter_bridge',
-        parameters=[{'use_sim_time': True}],
-        arguments=['/world/mars_test_world/model/rocker_bogie_rover_visual/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model'],
+        arguments=[
+            '/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
+            '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+            '/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            '/imu@sensor_msgs/msg/Imu[gz.msgs.IMU',
+            '/world/mars_test_world/model/rocker_bogie_rover_visual/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model'
+        ],
         remappings=[
             ('/world/mars_test_world/model/rocker_bogie_rover_visual/joint_state', '/joint_states')
         ],
@@ -116,28 +84,16 @@ def generate_launch_description():
     bridge_clock = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        parameters=[{'use_sim_time': True}],
+        parameters=[{'use_sim_time': False}],
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
         output='screen'
     )
-
-    # state_estimation = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(
-    #         os.path.join(current_dir, 'state_estimation.launch.py')
-    #     )
-    # )
 
     return LaunchDescription([
         robot_state_publisher,
         gazebo,
         delete_robot,
         spawn_robot,
-        bridge_cmd_vel,
-        bridge_odom,
-        bridge_tf,
-        bridge_scan,
-        bridge_imu,
-        bridge_joint_states,
+        bridge_all,
         bridge_clock,
-        # state_estimation,
     ])
