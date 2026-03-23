@@ -1,7 +1,8 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
+from launch_ros.actions import SetRemap
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
@@ -27,14 +28,21 @@ def generate_launch_description():
     # Launch Nav2 
     # Use the navigation launch file to start controllers, planners, bt, etc.
     # Note: We omit map_server & AMCL since we rely on SLAM Toolbox for map -> odom
-    nav2_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(nav2_bringup_dir, 'launch', 'navigation_launch.py')),
-        launch_arguments={
-            'use_sim_time': use_sim_time,
-            'params_file': params_file,
-            'autostart': 'True',
-            'use_collision_monitor': 'False'
-        }.items())
+    nav2_launch = GroupAction(
+        actions=[
+            SetRemap(src='/cmd_vel', dst='/cmd_vel_nav'),
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(os.path.join(nav2_bringup_dir, 'launch', 'navigation_launch.py')),
+                launch_arguments={
+                    'use_sim_time': use_sim_time,
+                    'params_file': params_file,
+                    'autostart': 'True',
+                    'use_collision_monitor': 'false',
+                    'use_velocity_smoother': 'false'
+                }.items()
+            )
+        ]
+    )
 
     return LaunchDescription([
         declare_use_sim_time_cmd,
