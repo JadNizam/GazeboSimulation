@@ -15,38 +15,34 @@ def generate_launch_description():
         )
     )
 
-    # Launch state estimation
-    ekf_launch = IncludeLaunchDescription(
+    # Launch SLAM Toolbox properly
+    slam_toolbox_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(pkg_dir, 'launch', 'state_estimation.launch.py')
-        )
+            os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')
+        ),
+        launch_arguments={
+            'use_sim_time': 'true',
+            'slam_params_file': os.path.join(pkg_dir, 'config', 'slam_toolbox.yaml')
+        }.items()
     )
 
-    # Launch SLAM Toolbox
-    slam_toolbox_node = Node(
-        package='slam_toolbox',
-        executable='async_slam_toolbox_node',
-        name='slam_toolbox',
-        output='screen',
-        parameters=[
-            os.path.join(pkg_dir, 'config', 'slam_toolbox.yaml'),
-            {'use_sim_time': True}
+    # Launch RViz buffered
+    rviz_node = TimerAction(
+        period=3.0,
+        actions=[
+            Node(
+                package='rviz2',
+                executable='rviz2',
+                name='rviz2',
+                arguments=['-d', os.path.join(pkg_dir, 'config', 'slam_view.rviz')],
+                output='screen',
+                parameters=[{'use_sim_time': True}]
+            )
         ]
-    )
-
-    # Launch RViz
-    rviz_node = Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        arguments=['-d', os.path.join(pkg_dir, 'config', 'slam_view.rviz')],
-        output='screen',
-        parameters=[{'use_sim_time': True}]
     )
 
     return LaunchDescription([
         sim_launch,
-        ekf_launch,
-        slam_toolbox_node,
+        slam_toolbox_launch,
         rviz_node
     ])
