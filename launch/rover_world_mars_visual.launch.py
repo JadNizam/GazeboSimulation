@@ -61,9 +61,11 @@ def generate_launch_description():
         output='screen'
     )
 
+
     bridge_cmd_vel = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
+        parameters=[{'use_sim_time': True}],
         arguments=['/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist'],
         output='screen'
     )
@@ -71,6 +73,7 @@ def generate_launch_description():
     bridge_odom = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
+        parameters=[{'use_sim_time': True}],
         arguments=['/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry'],
         output='screen'
     )
@@ -78,6 +81,7 @@ def generate_launch_description():
     bridge_tf = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
+        parameters=[{'use_sim_time': True}],
         arguments=['/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V'],
         output='screen'
     )
@@ -85,13 +89,15 @@ def generate_launch_description():
     bridge_scan = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan'],
+        parameters=[{'use_sim_time': True}],
+        arguments=['/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'],
         output='screen'
     )
 
     bridge_imu = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
+        parameters=[{'use_sim_time': True}],
         arguments=['/imu@sensor_msgs/msg/Imu@gz.msgs.IMU'],
         output='screen'
     )
@@ -99,6 +105,7 @@ def generate_launch_description():
     bridge_joint_states = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
+        parameters=[{'use_sim_time': True}],
         arguments=['/world/mars_test_world/model/rocker_bogie_rover_visual/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model'],
         remappings=[
             ('/world/mars_test_world/model/rocker_bogie_rover_visual/joint_state', '/joint_states')
@@ -109,16 +116,16 @@ def generate_launch_description():
     bridge_clock = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
+        parameters=[{'use_sim_time': True}],
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
         output='screen'
     )
 
-    # State estimation (EKF fusing odom + IMU)
-    state_estimation = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(current_dir, 'state_estimation.launch.py')
-        )
-    )
+    # state_estimation = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(
+    #         os.path.join(current_dir, 'state_estimation.launch.py')
+    #     )
+    # )
 
     return LaunchDescription([
         robot_state_publisher,
@@ -132,5 +139,5 @@ def generate_launch_description():
         bridge_imu,
         bridge_joint_states,
         bridge_clock,
-        state_estimation,
+        # state_estimation,
     ])
