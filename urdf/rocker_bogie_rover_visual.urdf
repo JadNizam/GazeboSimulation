@@ -1467,9 +1467,10 @@
       <max_linear_acceleration>10.0</max_linear_acceleration>
       <max_angular_acceleration>15.0</max_angular_acceleration>
       <max_velocity>3.0</max_velocity>
-      <odom_topic>/odom</odom_topic>
-      <tf_topic>/tf</tf_topic>
+      <odom_topic>/diff_odom</odom_topic>
+      <tf_topic>/diff_tf</tf_topic>
       <odom_publish_frequency>100</odom_publish_frequency>
+      <gaussian_noise>0.001</gaussian_noise>
       <odom_frame>odom</odom_frame>
       <robot_base_frame>base_link</robot_base_frame>
       <publish_odom>true</publish_odom>
@@ -1477,6 +1478,16 @@
       <publish_wheel_tf>false</publish_wheel_tf>
       <frame_id>odom</frame_id>
       <child_frame_id>base_link</child_frame_id>
+    </plugin>
+  </gazebo>
+  <gazebo>
+    <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <odom_topic>/odom</odom_topic>
+      <odom_publish_frequency>100</odom_publish_frequency>
+      <gaussian_noise>0.001</gaussian_noise>
+      <dimensions>3</dimensions>
     </plugin>
   </gazebo>
 </robot>
