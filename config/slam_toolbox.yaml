@@ -6,6 +6,7 @@ slam_toolbox:
     base_frame: base_link
     provide_odom_frame: false
     publish_tf: true
+    transform_publish_period: 0.02
     scan_topic: /scan
     mode: mapping
     # Minimal parameters to get started

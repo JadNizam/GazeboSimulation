@@ -18,7 +18,17 @@ def generate_launch_description():
         }.items()
     )
 
-    # 2. Launch SLAM Toolbox properly managed
+    # 2. Launch State Estimation (EKF)
+    state_estimation_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_dir, 'launch', 'state_estimation.launch.py')
+        ),
+        launch_arguments={
+            'use_sim_time': 'true'
+        }.items()
+    )
+
+    # 3. Launch SLAM Toolbox properly managed
     slam_toolbox_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')
@@ -57,6 +67,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         sim_launch,
+        state_estimation_launch,
         slam_toolbox_launch,
         nav2_launch,
         rviz_node

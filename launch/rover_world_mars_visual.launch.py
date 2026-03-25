@@ -70,7 +70,6 @@ def generate_launch_description():
         arguments=[
             '/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
             '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
-            '/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
             '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
             '/imu@sensor_msgs/msg/Imu[gz.msgs.IMU',
             '/world/mars_test_world/model/rocker_bogie_rover_visual/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model'
@@ -84,7 +83,7 @@ def generate_launch_description():
     bridge_clock = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        parameters=[{'use_sim_time': False}],
+        parameters=[{'use_sim_time': True}],
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
         output='screen'
     )

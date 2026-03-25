@@ -20,7 +20,9 @@ def generate_launch_description():
             {'use_sim_time': True}
         ],
         remappings=[
-            ('/odometry/filtered', '/odom')
+            # The EKF provides the odom->base_link transform and a filtered odometry topic.
+            # Remap the output to /odom so that other nodes can use it.
+            ('/odometry/filtered', '/odom_filtered')
         ]
     )
 
