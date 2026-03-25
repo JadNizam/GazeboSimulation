@@ -43,7 +43,7 @@
         <type>linear</type>
         <start>40.0</start>
         <end>120.0</end>
-        <density>0.02</density>
+        <density>0.035</density>
       </fog>
     </scene>
 
@@ -119,9 +119,9 @@
     
 
     
-    <!-- Structured Perception Environment -->
+    
 
-    <!-- Central Spawn Arena / Landmark Boundaries -->
+    
     <model name="spawn_boundary_north">
       <static>true</static>
       <pose>3 0 0.75 0 0 0</pose>
@@ -136,7 +136,7 @@
     
     <model name="spawn_boundary_south_angled">
       <static>true</static>
-      <pose>-3 0 0.75 0 0 0.2618</pose> <!-- 15 degrees angled -->
+      <pose>-3 0 0.75 0 0 0.2618</pose> 
       <link name="link">
         <collision name="c"><geometry><box><size>0.2 5.0 1.5</size></box></geometry></collision>
         <visual name="v">
@@ -158,7 +158,7 @@
       </link>
     </model>
 
-    <!-- Large L-Shape Structure for Corner Features -->
+    
     <model name="l_shape_feature">
       <static>true</static>
       <pose>4 4 0.75 0 0 0</pose>
@@ -170,7 +170,7 @@
       </link>
     </model>
 
-    <!-- Distinct Cylindrical Pillars for Scan Matching Landmarks -->
+    
     <model name="perception_pillar_1">
       <static>true</static><pose>1.5 2.5 1 0 0 0</pose>
       <link name="link">
@@ -187,19 +187,19 @@
       </link>
     </model>
 
-    <!-- Corridor Section (Asymmetric to avoid mapping aliasing) -->
+    
     <model name="corridor_main">
       <static>true</static>
       <pose>7 0 0.75 0 0 1.5708</pose>
       <link name="link">
         <collision name="c_left"><pose>0 2.0 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry></collision>
-        <collision name="c_right"><pose>1.0 -1.5 0 0 0 0</pose><geometry><box><size>6 0.2 1.5</size></box></geometry></collision> <!-- staggered -->
+        <collision name="c_right"><pose>1.0 -1.5 0 0 0 0</pose><geometry><box><size>6 0.2 1.5</size></box></geometry></collision> 
         <visual name="v_left"><pose>0 2.0 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry><material><ambient>0.5 0.3 0.2 1</ambient></material></visual>
         <visual name="v_right"><pose>1.0 -1.5 0 0 0 0</pose><geometry><box><size>6 0.2 1.5</size></box></geometry><material><ambient>0.5 0.3 0.2 1</ambient></material></visual>
       </link>
     </model>
 
-    <!-- Blocky Obstacle Field / Rubble for rich SLAM features -->
+    
     <model name="rect_obstacle_1">
       <static>true</static><pose>-1.5 5.0 0.5 0 0 0.4</pose>
       <link name="link">
@@ -224,7 +224,7 @@
       </link>
     </model>
 
-    <!-- U-Shape Dead end / Garage block far east -->
+    
     <model name="u_shape_garage">
       <static>true</static>
       <pose>10 5 1 0 0 3.14159</pose>
@@ -237,5 +237,28 @@
         <visual name="v_right"><pose>2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient></material></visual>
       </link>
     </model>
-  </world>
+  
+    
+    <model name="boulder_1">
+      <static>true</static><pose>2.5 1.5 -0.2 0.3 0.5 0.7</pose>
+      <link name="link"><collision name="c"><geometry><box><size>0.8 1.2 0.6</size></box></geometry></collision><visual name="v"><geometry><box><size>0.8 1.2 0.6</size></box></geometry><material><ambient>0.5 0.25 0.15 1</ambient><diffuse>0.55 0.28 0.18 1</diffuse></material></visual></link>
+    </model>
+    <model name="boulder_2">
+      <static>true</static><pose>1.5 -1.0 -0.4 0.1 -0.4 1.2</pose>
+      <link name="link"><collision name="c"><geometry><box><size>1.5 0.9 0.8</size></box></geometry></collision><visual name="v"><geometry><box><size>1.5 0.9 0.8</size></box></geometry><material><ambient>0.45 0.22 0.12 1</ambient><diffuse>0.5 0.24 0.14 1</diffuse></material></visual></link>
+    </model>
+    <model name="boulder_3">
+      <static>true</static><pose>-2.0 2.5 -0.3 -0.2 0.6 0.1</pose>
+      <link name="link"><collision name="c"><geometry><box><size>1.0 1.0 0.9</size></box></geometry></collision><visual name="v"><geometry><box><size>1.0 1.0 0.9</size></box></geometry><material><ambient>0.52 0.26 0.16 1</ambient><diffuse>0.58 0.30 0.20 1</diffuse></material></visual></link>
+    </model>
+    
+    <model name="debris_cluster">
+      <static>true</static><pose>4.0 -2.5 -0.1 0 0 0</pose>
+      <link name="rock1"><pose>0 0 0 0.2 0.1 0</pose><collision name="c"><geometry><box><size>0.4 0.3 0.3</size></box></geometry></collision><visual name="v"><geometry><box><size>0.4 0.3 0.3</size></box></geometry><material><ambient>0.4 0.2 0.1 1</ambient></material></visual></link>
+      <link name="rock2"><pose>0.5 0.4 0.05 0.5 0.8 0.2</pose><collision name="c"><geometry><box><size>0.5 0.2 0.4</size></box></geometry></collision><visual name="v"><geometry><box><size>0.5 0.2 0.4</size></box></geometry><material><ambient>0.45 0.22 0.12 1</ambient></material></visual></link>
+      <link name="rock3"><pose>-0.3 0.6 0.1 0.1 0.4 1.5</pose><collision name="c"><geometry><box><size>0.3 0.4 0.5</size></box></geometry></collision><visual name="v"><geometry><box><size>0.3 0.4 0.5</size></box></geometry><material><ambient>0.5 0.25 0.15 1</ambient></material></visual></link>
+    </model>
+  
+    
+    </world>
 </sdf>
