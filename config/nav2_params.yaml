@@ -79,6 +79,13 @@ controller_server:
       short_circuit_trajectory_evaluation: True
       stateful: True
       critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
+      RotateToGoal.plugin: "dwb_critics::RotateToGoalCritic"
+      Oscillation.plugin: "dwb_critics::OscillationCritic"
+      BaseObstacle.plugin: "dwb_critics::BaseObstacleCritic"
+      GoalAlign.plugin: "dwb_critics::GoalAlignCritic"
+      PathAlign.plugin: "dwb_critics::PathAlignCritic"
+      PathDist.plugin: "dwb_critics::PathDistCritic"
+      GoalDist.plugin: "dwb_critics::GoalDistCritic"
       BaseObstacle.scale: 0.02
       PathAlign.scale: 32.0
       PathAlign.forward_point_distance: 0.1
