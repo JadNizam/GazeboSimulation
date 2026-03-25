@@ -4,9 +4,9 @@
 
     
     <physics name="mars_physics" type="ode">
-      <max_step_size>0.001</max_step_size>
+      <max_step_size>0.004</max_step_size>
       <real_time_factor>1.0</real_time_factor>
-      <real_time_update_rate>1000</real_time_update_rate>
+      <real_time_update_rate>250</real_time_update_rate>
       <ode>
         <solver>
           <type>quick</type>
@@ -119,50 +119,123 @@
     
 
     
-    <model name="spawn_corner">
+    <!-- Structured Perception Environment -->
+
+    <!-- Central Spawn Arena / Landmark Boundaries -->
+    <model name="spawn_boundary_north">
       <static>true</static>
-      <pose>-3 -3 0.5 0 0 0</pose>
+      <pose>3 0 0.75 0 0 0</pose>
       <link name="link">
-        <collision name="c1"><pose>0 1.5 0 0 0 0</pose><geometry><box><size>0.2 3 1</size></box></geometry></collision>
-        <collision name="c2"><pose>1.5 0 0 0 0 0</pose><geometry><box><size>3 0.2 1</size></box></geometry></collision>
-        <visual name="v1"><pose>0 1.5 0 0 0 0</pose><geometry><box><size>0.2 3 1</size></box></geometry><material><ambient>0.6 0.4 0.2 1</ambient></material></visual>
-        <visual name="v2"><pose>1.5 0 0 0 0 0</pose><geometry><box><size>3 0.2 1</size></box></geometry><material><ambient>0.6 0.4 0.2 1</ambient></material></visual>
+        <collision name="c"><geometry><box><size>0.2 4.0 1.5</size></box></geometry></collision>
+        <visual name="v">
+          <geometry><box><size>0.2 4.0 1.5</size></box></geometry>
+          <material><ambient>0.6 0.3 0.1 1</ambient></material>
+        </visual>
       </link>
-    </model><model name="corridor_walls">
+    </model>
+    
+    <model name="spawn_boundary_south_angled">
       <static>true</static>
-      <pose>5 2 0.75 0 0 0.5</pose>
+      <pose>-3 0 0.75 0 0 0.2618</pose> <!-- 15 degrees angled -->
       <link name="link">
-        <collision name="c_left"><pose>0 1.5 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry></collision>
-        <collision name="c_right"><pose>0 -1.5 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry></collision>
-        <visual name="v_left"><pose>0 1.5 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry><material><ambient>0.5 0.3 0.2 1</ambient></material></visual>
-        <visual name="v_right"><pose>0 -1.5 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry><material><ambient>0.5 0.3 0.2 1</ambient></material></visual>
+        <collision name="c"><geometry><box><size>0.2 5.0 1.5</size></box></geometry></collision>
+        <visual name="v">
+          <geometry><box><size>0.2 5.0 1.5</size></box></geometry>
+          <material><ambient>0.5 0.3 0.2 1</ambient></material>
+        </visual>
       </link>
-    </model><model name="clutter_pillar_1">
-      <static>true</static><pose>10 -2 1 0 0 0</pose>
-      <link name="link"><collision name="c"><geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry></collision><visual name="v"><geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry><material><ambient>0.4 0.4 0.4 1</ambient></material></visual></link>
-    </model><model name="clutter_box_1">
-      <static>true</static><pose>12 -4 0.5 0 0 0.785</pose>
-      <link name="link"><collision name="c"><geometry><box><size>1.5 1.5 1</size></box></geometry></collision><visual name="v"><geometry><box><size>1.5 1.5 1</size></box></geometry><material><ambient>0.6 0.2 0.2 1</ambient></material></visual></link>
-    </model><model name="t_junction">
+    </model>
+
+    <model name="spawn_boundary_west">
       <static>true</static>
-      <pose>5 8 0.75 0 0 0</pose>
+      <pose>0 -3 0.75 0 0 1.5708</pose>
       <link name="link">
-        <collision name="c1"><pose>0 0 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry></collision>
-        <collision name="c2"><pose>0 3 0 0 0 0</pose><geometry><box><size>0.2 6 1.5</size></box></geometry></collision>
-        <visual name="v1"><pose>0 0 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient></material></visual>
-        <visual name="v2"><pose>0 3 0 0 0 0</pose><geometry><box><size>0.2 6 1.5</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient></material></visual>
+        <collision name="c"><geometry><box><size>0.2 3.0 1.5</size></box></geometry></collision>
+        <visual name="v">
+          <geometry><box><size>0.2 3.0 1.5</size></box></geometry>
+          <material><ambient>0.55 0.35 0.15 1</ambient></material>
+        </visual>
       </link>
-    </model><model name="u_shape_deadend">
+    </model>
+
+    <!-- Large L-Shape Structure for Corner Features -->
+    <model name="l_shape_feature">
       <static>true</static>
-      <pose>-5 5 1 0 0 -0.5</pose>
+      <pose>4 4 0.75 0 0 0</pose>
+      <link name="link">
+        <collision name="c1"><pose>0 1.5 0 0 0 0</pose><geometry><box><size>0.2 3 1.5</size></box></geometry></collision>
+        <collision name="c2"><pose>1.5 0 0 0 0 0</pose><geometry><box><size>3 0.2 1.5</size></box></geometry></collision>
+        <visual name="v1"><pose>0 1.5 0 0 0 0</pose><geometry><box><size>0.2 3 1.5</size></box></geometry><material><ambient>0.5 0.4 0.3 1</ambient></material></visual>
+        <visual name="v2"><pose>1.5 0 0 0 0 0</pose><geometry><box><size>3 0.2 1.5</size></box></geometry><material><ambient>0.5 0.4 0.3 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <!-- Distinct Cylindrical Pillars for Scan Matching Landmarks -->
+    <model name="perception_pillar_1">
+      <static>true</static><pose>1.5 2.5 1 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry><material><ambient>0.4 0.4 0.4 1</ambient></material></visual>
+      </link>
+    </model>
+    
+    <model name="perception_pillar_2">
+      <static>true</static><pose>2.0 -2.0 1 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry><material><ambient>0.45 0.45 0.45 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <!-- Corridor Section (Asymmetric to avoid mapping aliasing) -->
+    <model name="corridor_main">
+      <static>true</static>
+      <pose>7 0 0.75 0 0 1.5708</pose>
+      <link name="link">
+        <collision name="c_left"><pose>0 2.0 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry></collision>
+        <collision name="c_right"><pose>1.0 -1.5 0 0 0 0</pose><geometry><box><size>6 0.2 1.5</size></box></geometry></collision> <!-- staggered -->
+        <visual name="v_left"><pose>0 2.0 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry><material><ambient>0.5 0.3 0.2 1</ambient></material></visual>
+        <visual name="v_right"><pose>1.0 -1.5 0 0 0 0</pose><geometry><box><size>6 0.2 1.5</size></box></geometry><material><ambient>0.5 0.3 0.2 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <!-- Blocky Obstacle Field / Rubble for rich SLAM features -->
+    <model name="rect_obstacle_1">
+      <static>true</static><pose>-1.5 5.0 0.5 0 0 0.4</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>2 1 1</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>2 1 1</size></box></geometry><material><ambient>0.6 0.3 0.3 1</ambient></material></visual>
+      </link>
+    </model>
+    
+    <model name="rect_obstacle_2">
+      <static>true</static><pose>-4 3.0 0.6 0 0 -0.2</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>1.5 1.5 1.2</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>1.5 1.5 1.2</size></box></geometry><material><ambient>0.3 0.5 0.3 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <model name="rect_obstacle_3">
+      <static>true</static><pose>-5 -2 0.75 0 0 0.5</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>3 0.5 1.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>3 0.5 1.5</size></box></geometry><material><ambient>0.4 0.3 0.4 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <!-- U-Shape Dead end / Garage block far east -->
+    <model name="u_shape_garage">
+      <static>true</static>
+      <pose>10 5 1 0 0 3.14159</pose>
       <link name="link">
         <collision name="c_back"><pose>0 2 0 0 0 0</pose><geometry><box><size>4 0.2 2</size></box></geometry></collision>
         <collision name="c_left"><pose>-2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry></collision>
         <collision name="c_right"><pose>2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry></collision>
-        
-        <visual name="v_back"><pose>0 2 0 0 0 0</pose><geometry><box><size>4 0.2 2</size></box></geometry><material><ambient>0.6 0.3 0.1 1</ambient></material></visual>
-        <visual name="v_left"><pose>-2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.6 0.3 0.1 1</ambient></material></visual>
-        <visual name="v_right"><pose>2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.6 0.3 0.1 1</ambient></material></visual>
+        <visual name="v_back"><pose>0 2 0 0 0 0</pose><geometry><box><size>4 0.2 2</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient></material></visual>
+        <visual name="v_left"><pose>-2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient></material></visual>
+        <visual name="v_right"><pose>2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient></material></visual>
       </link>
-    </model></world>
+    </model>
+  </world>
 </sdf>
