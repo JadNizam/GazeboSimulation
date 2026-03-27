@@ -750,11 +750,10 @@
       <surface>
         <friction>
           <ode>
-            <mu>2.0</mu>
-            <mu2>0.05</mu2>
-            <fdir1>1 0 0</fdir1>
-            <slip1>0.02</slip1>
-            <slip2>0.05</slip2>
+            <mu>0.8</mu>
+            <mu2>0.8</mu2>
+            <slip1>0.03</slip1>
+            <slip2>0.03</slip2>
           </ode>
         </friction>
         <contact>
@@ -837,11 +836,10 @@
       <surface>
         <friction>
           <ode>
-            <mu>2.0</mu>
-            <mu2>0.05</mu2>
-            <fdir1>1 0 0</fdir1>
-            <slip1>0.02</slip1>
-            <slip2>0.05</slip2>
+            <mu>0.8</mu>
+            <mu2>0.8</mu2>
+            <slip1>0.03</slip1>
+            <slip2>0.03</slip2>
           </ode>
         </friction>
         <contact>
@@ -924,11 +922,10 @@
       <surface>
         <friction>
           <ode>
-            <mu>2.0</mu>
-            <mu2>0.05</mu2>
-            <fdir1>1 0 0</fdir1>
-            <slip1>0.02</slip1>
-            <slip2>0.05</slip2>
+            <mu>0.8</mu>
+            <mu2>0.8</mu2>
+            <slip1>0.03</slip1>
+            <slip2>0.03</slip2>
           </ode>
         </friction>
         <contact>
@@ -1011,11 +1008,10 @@
       <surface>
         <friction>
           <ode>
-            <mu>2.0</mu>
-            <mu2>0.05</mu2>
-            <fdir1>1 0 0</fdir1>
-            <slip1>0.02</slip1>
-            <slip2>0.05</slip2>
+            <mu>0.8</mu>
+            <mu2>0.8</mu2>
+            <slip1>0.03</slip1>
+            <slip2>0.03</slip2>
           </ode>
         </friction>
         <contact>
@@ -1098,11 +1094,10 @@
       <surface>
         <friction>
           <ode>
-            <mu>2.0</mu>
-            <mu2>0.05</mu2>
-            <fdir1>1 0 0</fdir1>
-            <slip1>0.02</slip1>
-            <slip2>0.05</slip2>
+            <mu>0.8</mu>
+            <mu2>0.8</mu2>
+            <slip1>0.03</slip1>
+            <slip2>0.03</slip2>
           </ode>
         </friction>
         <contact>
@@ -1185,11 +1180,10 @@
       <surface>
         <friction>
           <ode>
-            <mu>2.0</mu>
-            <mu2>0.05</mu2>
-            <fdir1>1 0 0</fdir1>
-            <slip1>0.02</slip1>
-            <slip2>0.05</slip2>
+            <mu>0.8</mu>
+            <mu2>0.8</mu2>
+            <slip1>0.03</slip1>
+            <slip2>0.03</slip2>
           </ode>
         </friction>
         <contact>
@@ -1250,8 +1244,8 @@
   </gazebo>
   <gazebo reference="wheel_fl">
     <material>Gazebo/FlatBlack</material>
-    <mu1>2.0</mu1>
-    <mu2>0.15</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -1259,8 +1253,8 @@
   </gazebo>
   <gazebo reference="wheel_fr">
     <material>Gazebo/FlatBlack</material>
-    <mu1>2.0</mu1>
-    <mu2>0.15</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -1268,8 +1262,8 @@
   </gazebo>
   <gazebo reference="wheel_ml">
     <material>Gazebo/FlatBlack</material>
-    <mu1>2.0</mu1>
-    <mu2>0.15</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -1277,8 +1271,8 @@
   </gazebo>
   <gazebo reference="wheel_mr">
     <material>Gazebo/FlatBlack</material>
-    <mu1>2.0</mu1>
-    <mu2>0.15</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -1286,8 +1280,8 @@
   </gazebo>
   <gazebo reference="wheel_rl">
     <material>Gazebo/FlatBlack</material>
-    <mu1>2.0</mu1>
-    <mu2>0.15</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -1295,8 +1289,8 @@
   </gazebo>
   <gazebo reference="wheel_rr">
     <material>Gazebo/FlatBlack</material>
-    <mu1>2.0</mu1>
-    <mu2>0.15</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
