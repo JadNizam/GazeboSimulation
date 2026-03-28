@@ -73,6 +73,26 @@
     </light>
 
     
+    
+    <light type="spot" name="lab_spotlight_main">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 12 0 0 0</pose>
+      <diffuse>0.9 0.9 1.0 1.0</diffuse>
+      <specular>0.5 0.5 0.5 1.0</specular>
+      <attenuation>
+        <range>40</range>
+        <constant>0.2</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>0 0 -1</direction>
+      <spot>
+        <inner_angle>1.0</inner_angle>
+        <outer_angle>1.5</outer_angle>
+        <falloff>1.0</falloff>
+      </spot>
+    </light>
+    
     <model name="mars_ground">
       <static>true</static>
       <link name="ground_link">
@@ -129,7 +149,7 @@
         <collision name="c"><geometry><box><size>0.2 4.0 1.5</size></box></geometry></collision>
         <visual name="v">
           <geometry><box><size>0.2 4.0 1.5</size></box></geometry>
-          <material><ambient>0.6 0.3 0.1 1</ambient></material>
+          <material><ambient>0.85 0.85 0.85 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material>
         </visual>
       </link>
     </model>
@@ -141,7 +161,7 @@
         <collision name="c"><geometry><box><size>0.2 5.0 1.5</size></box></geometry></collision>
         <visual name="v">
           <geometry><box><size>0.2 5.0 1.5</size></box></geometry>
-          <material><ambient>0.5 0.3 0.2 1</ambient></material>
+          <material><ambient>0.85 0.85 0.85 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material>
         </visual>
       </link>
     </model>
@@ -153,7 +173,7 @@
         <collision name="c"><geometry><box><size>0.2 3.0 1.5</size></box></geometry></collision>
         <visual name="v">
           <geometry><box><size>0.2 3.0 1.5</size></box></geometry>
-          <material><ambient>0.55 0.35 0.15 1</ambient></material>
+          <material><ambient>0.85 0.85 0.85 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material>
         </visual>
       </link>
     </model>
@@ -165,8 +185,8 @@
       <link name="link">
         <collision name="c1"><pose>0 1.5 0 0 0 0</pose><geometry><box><size>0.2 3 1.5</size></box></geometry></collision>
         <collision name="c2"><pose>1.5 0 0 0 0 0</pose><geometry><box><size>3 0.2 1.5</size></box></geometry></collision>
-        <visual name="v1"><pose>0 1.5 0 0 0 0</pose><geometry><box><size>0.2 3 1.5</size></box></geometry><material><ambient>0.5 0.4 0.3 1</ambient></material></visual>
-        <visual name="v2"><pose>1.5 0 0 0 0 0</pose><geometry><box><size>3 0.2 1.5</size></box></geometry><material><ambient>0.5 0.4 0.3 1</ambient></material></visual>
+        <visual name="v1"><pose>0 1.5 0 0 0 0</pose><geometry><box><size>0.2 3 1.5</size></box></geometry><material><ambient>0.55 0.55 0.6 1</ambient><diffuse>0.6 0.6 0.65 1</diffuse></material></visual>
+        <visual name="v2"><pose>1.5 0 0 0 0 0</pose><geometry><box><size>3 0.2 1.5</size></box></geometry><material><ambient>0.55 0.55 0.6 1</ambient><diffuse>0.6 0.6 0.65 1</diffuse></material></visual>
       </link>
     </model>
 
@@ -175,7 +195,7 @@
       <static>true</static><pose>1.5 2.5 1 0 0 0</pose>
       <link name="link">
         <collision name="c"><geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry></collision>
-        <visual name="v"><geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry><material><ambient>0.4 0.4 0.4 1</ambient></material></visual>
+        <visual name="v"><geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry><material><ambient>0.8 0.6 0.1 1</ambient><diffuse>0.9 0.7 0.1 1</diffuse></material></visual>
       </link>
     </model>
     
@@ -183,7 +203,7 @@
       <static>true</static><pose>2.0 -2.0 1 0 0 0</pose>
       <link name="link">
         <collision name="c"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry></collision>
-        <visual name="v"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry><material><ambient>0.45 0.45 0.45 1</ambient></material></visual>
+        <visual name="v"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry><material><ambient>0.8 0.6 0.1 1</ambient><diffuse>0.9 0.7 0.1 1</diffuse></material></visual>
       </link>
     </model>
 
@@ -194,8 +214,8 @@
       <link name="link">
         <collision name="c_left"><pose>0 2.0 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry></collision>
         <collision name="c_right"><pose>1.0 -1.5 0 0 0 0</pose><geometry><box><size>6 0.2 1.5</size></box></geometry></collision> 
-        <visual name="v_left"><pose>0 2.0 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry><material><ambient>0.5 0.3 0.2 1</ambient></material></visual>
-        <visual name="v_right"><pose>1.0 -1.5 0 0 0 0</pose><geometry><box><size>6 0.2 1.5</size></box></geometry><material><ambient>0.5 0.3 0.2 1</ambient></material></visual>
+        <visual name="v_left"><pose>0 2.0 0 0 0 0</pose><geometry><box><size>8 0.2 1.5</size></box></geometry><material><ambient>0.55 0.55 0.6 1</ambient><diffuse>0.6 0.6 0.65 1</diffuse></material></visual>
+        <visual name="v_right"><pose>1.0 -1.5 0 0 0 0</pose><geometry><box><size>6 0.2 1.5</size></box></geometry><material><ambient>0.55 0.55 0.6 1</ambient><diffuse>0.6 0.6 0.65 1</diffuse></material></visual>
       </link>
     </model>
 
@@ -204,7 +224,7 @@
       <static>true</static><pose>-1.5 5.0 0.5 0 0 0.4</pose>
       <link name="link">
         <collision name="c"><geometry><box><size>2 1 1</size></box></geometry></collision>
-        <visual name="v"><geometry><box><size>2 1 1</size></box></geometry><material><ambient>0.6 0.3 0.3 1</ambient></material></visual>
+        <visual name="v"><geometry><box><size>2 1 1</size></box></geometry><material><ambient>0.9 0.4 0.1 1</ambient><diffuse>0.95 0.5 0.2 1</diffuse></material></visual>
       </link>
     </model>
     
@@ -212,7 +232,7 @@
       <static>true</static><pose>-4 3.0 0.6 0 0 -0.2</pose>
       <link name="link">
         <collision name="c"><geometry><box><size>1.5 1.5 1.2</size></box></geometry></collision>
-        <visual name="v"><geometry><box><size>1.5 1.5 1.2</size></box></geometry><material><ambient>0.3 0.5 0.3 1</ambient></material></visual>
+        <visual name="v"><geometry><box><size>1.5 1.5 1.2</size></box></geometry><material><ambient>0.2 0.3 0.8 1</ambient><diffuse>0.25 0.35 0.9 1</diffuse></material></visual>
       </link>
     </model>
 
@@ -220,7 +240,7 @@
       <static>true</static><pose>-5 -2 0.75 0 0 0.5</pose>
       <link name="link">
         <collision name="c"><geometry><box><size>3 0.5 1.5</size></box></geometry></collision>
-        <visual name="v"><geometry><box><size>3 0.5 1.5</size></box></geometry><material><ambient>0.4 0.3 0.4 1</ambient></material></visual>
+        <visual name="v"><geometry><box><size>3 0.5 1.5</size></box></geometry><material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material></visual>
       </link>
     </model>
 
@@ -232,9 +252,9 @@
         <collision name="c_back"><pose>0 2 0 0 0 0</pose><geometry><box><size>4 0.2 2</size></box></geometry></collision>
         <collision name="c_left"><pose>-2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry></collision>
         <collision name="c_right"><pose>2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry></collision>
-        <visual name="v_back"><pose>0 2 0 0 0 0</pose><geometry><box><size>4 0.2 2</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient></material></visual>
-        <visual name="v_left"><pose>-2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient></material></visual>
-        <visual name="v_right"><pose>2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient></material></visual>
+        <visual name="v_back"><pose>0 2 0 0 0 0</pose><geometry><box><size>4 0.2 2</size></box></geometry><material><ambient>0.6 0.7 0.8 1</ambient><diffuse>0.65 0.75 0.85 1</diffuse></material></visual>
+        <visual name="v_left"><pose>-2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.6 0.7 0.8 1</ambient><diffuse>0.65 0.75 0.85 1</diffuse></material></visual>
+        <visual name="v_right"><pose>2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.6 0.7 0.8 1</ambient><diffuse>0.65 0.75 0.85 1</diffuse></material></visual>
       </link>
     </model>
   
@@ -260,5 +280,73 @@
     </model>
   
     
+    
+    <!-- ================= LAB ADDITIONS ================= -->
+    <!-- Staging / Staging Pad for Rover -->
+    <model name="staging_pad">
+      <static>true</static>
+      <pose>0 0 0.005 0 0 0</pose>
+      <link name="pad_link">
+        <visual name="pad_vis">
+          <geometry><box><size>6 6 0.01</size></box></geometry>
+          <material>
+            <ambient>0.7 0.7 0.75 1.0</ambient>
+            <diffuse>0.8 0.8 0.85 1.0</diffuse>
+            <specular>0.2 0.2 0.2 1.0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Center Caution Line (Visual only) -->
+    <model name="caution_line">
+      <static>true</static>
+      <pose>5 0 0.006 0 0 0</pose>
+      <link name="line_link">
+        <visual name="line_vis">
+          <geometry><box><size>10 0.2 0.01</size></box></geometry>
+          <material>
+            <ambient>0.8 0.6 0.0 1.0</ambient>
+            <diffuse>0.9 0.7 0.1 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Test Facility Outer Perimeter Fencing -->
+    <model name="facility_perimeter">
+      <static>true</static>
+      <pose>0 0 1.0 0 0 0</pose>
+      <link name="walls">
+        <visual name="v_north">
+          <pose>0 15 0 0 0 0</pose><geometry><box><size>30 0.5 2</size></box></geometry>
+          <material><ambient>0.2 0.2 0.25 1</ambient><diffuse>0.3 0.3 0.35 1</diffuse></material>
+        </visual>
+        <collision name="c_north">
+          <pose>0 15 0 0 0 0</pose><geometry><box><size>30 0.5 2</size></box></geometry>
+        </collision>
+        <visual name="v_south">
+          <pose>0 -15 0 0 0 0</pose><geometry><box><size>30 0.5 2</size></box></geometry>
+          <material><ambient>0.2 0.2 0.25 1</ambient><diffuse>0.3 0.3 0.35 1</diffuse></material>
+        </visual>
+        <collision name="c_south">
+          <pose>0 -15 0 0 0 0</pose><geometry><box><size>30 0.5 2</size></box></geometry>
+        </collision>
+        <visual name="v_east">
+          <pose>15 0 0 0 0 0</pose><geometry><box><size>0.5 30 2</size></box></geometry>
+          <material><ambient>0.2 0.2 0.25 1</ambient><diffuse>0.3 0.3 0.35 1</diffuse></material>
+        </visual>
+        <collision name="c_east">
+          <pose>15 0 0 0 0 0</pose><geometry><box><size>0.5 30 2</size></box></geometry>
+        </collision>
+        <visual name="v_west">
+          <pose>-15 0 0 0 0 0</pose><geometry><box><size>0.5 30 2</size></box></geometry>
+          <material><ambient>0.2 0.2 0.25 1</ambient><diffuse>0.3 0.3 0.35 1</diffuse></material>
+        </visual>
+        <collision name="c_west">
+          <pose>-15 0 0 0 0 0</pose><geometry><box><size>0.5 30 2</size></box></geometry>
+        </collision>
+      </link>
+    </model>
     </world>
 </sdf>
