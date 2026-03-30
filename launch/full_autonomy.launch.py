@@ -61,7 +61,8 @@ def generate_launch_description():
             os.path.join(pkg_dir, 'launch', 'nav2.launch.py')
         ),
         launch_arguments={
-            'use_sim_time': 'true'
+            'use_sim_time': 'true',
+            'params_file': os.path.join(pkg_dir, 'config', 'nav2_params.yaml')
         }.items()
     )
 

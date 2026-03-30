@@ -44,26 +44,25 @@ controller_server:
     # Progress checker parameters
     progress_checker:
       plugin: "nav2_controller::SimpleProgressChecker"
-      required_movement_radius: 0.5
-      movement_time_allowance: 10.0
+      required_movement_radius: 0.2
+      movement_time_allowance: 15.0
 
     # Goal checker parameters
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.25
-      yaw_goal_tolerance: 0.25
-      stateful: True
+      xy_goal_tolerance: 0.4
+      yaw_goal_tolerance: 0.5
 
     # DWB parameters
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: True
-      min_vel_x: 0.0
+      min_vel_x: -0.2
       min_vel_y: 0.0
       max_vel_x: 0.8
       max_vel_y: 0.0
-      max_vel_theta: 1.0
+      max_vel_theta: 1.2
       min_speed_xy: 0.0
       max_speed_xy: 0.8
       min_speed_theta: 0.0
@@ -76,10 +75,10 @@ controller_server:
       vx_samples: 20
       vy_samples: 5
       vtheta_samples: 20
-      sim_time: 1.5
+      sim_time: 3.0
       linear_granularity: 0.05
       angular_granularity: 0.025
-      transform_tolerance: 0.2
+      transform_tolerance: 0.5
       xy_goal_tolerance: 0.25
       trans_stopped_velocity: 0.25
       short_circuit_trajectory_evaluation: True
@@ -106,11 +105,12 @@ controller_server:
 local_costmap:
   local_costmap:
     ros__parameters:
-      update_frequency: 5.0
-      publish_frequency: 2.0
+      update_frequency: 10.0
+      publish_frequency: 5.0
       global_frame: odom
       robot_base_frame: base_link
       use_sim_time: True
+      transform_tolerance: 0.5
       rolling_window: true
       width: 4
       height: 4
@@ -139,11 +139,12 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
-      update_frequency: 1.0
-      publish_frequency: 1.0
+      update_frequency: 3.0
+      publish_frequency: 2.0
       global_frame: map
       robot_base_frame: base_link
       use_sim_time: True
+      transform_tolerance: 0.5
       robot_radius: 0.45
       resolution: 0.05
       track_unknown_space: true
@@ -201,7 +202,7 @@ behaviors:
 waypoint_follower:
   ros__parameters:
     use_sim_time: True
-    loop_rate: 200
+    loop_rate: 20
     stop_on_failure: false
     waypoint_task_executor_plugin: "wait_at_waypoint"
     wait_at_waypoint:
