@@ -272,12 +272,7 @@
       <link name="link"><collision name="c"><geometry><box><size>1.0 1.0 0.9</size></box></geometry></collision><visual name="v"><geometry><box><size>1.0 1.0 0.9</size></box></geometry><material><ambient>0.52 0.26 0.16 1</ambient><diffuse>0.58 0.30 0.20 1</diffuse></material></visual></link>
     </model>
     
-    <model name="debris_cluster">
-      <static>true</static><pose>4.0 -2.5 -0.1 0 0 0</pose>
-      <link name="rock1"><pose>0 0 0 0.2 0.1 0</pose><collision name="c"><geometry><box><size>0.4 0.3 0.3</size></box></geometry></collision><visual name="v"><geometry><box><size>0.4 0.3 0.3</size></box></geometry><material><ambient>0.4 0.2 0.1 1</ambient></material></visual></link>
-      <link name="rock2"><pose>0.5 0.4 0.05 0.5 0.8 0.2</pose><collision name="c"><geometry><box><size>0.5 0.2 0.4</size></box></geometry></collision><visual name="v"><geometry><box><size>0.5 0.2 0.4</size></box></geometry><material><ambient>0.45 0.22 0.12 1</ambient></material></visual></link>
-      <link name="rock3"><pose>-0.3 0.6 0.1 0.1 0.4 1.5</pose><collision name="c"><geometry><box><size>0.3 0.4 0.5</size></box></geometry></collision><visual name="v"><geometry><box><size>0.3 0.4 0.5</size></box></geometry><material><ambient>0.5 0.25 0.15 1</ambient></material></visual></link>
-    </model>
+
   
     
     
