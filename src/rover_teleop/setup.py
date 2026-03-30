@@ -21,6 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'rover_keyboard_teleop = rover_teleop.rover_keyboard_teleop:main',
+            'simple_frontier_explorer = rover_teleop.simple_frontier_explorer:main',
+            'cmd_vel_relay = rover_teleop.cmd_vel_relay:main',
         ],
     },
 )
