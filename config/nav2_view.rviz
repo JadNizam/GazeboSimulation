@@ -22,6 +22,7 @@ Panels:
     Expanded:
       - /2D Goal Pose1
       - /Publish Point1
+      - /Waypoint / Nav2 Goal1
     Name: Tool Properties
     Splitter Ratio: 0.5886790156364441
   - Class: rviz_common/Views
@@ -29,6 +30,8 @@ Panels:
       - /Current View1
     Name: Views
     Splitter Ratio: 0.5
+  - Class: nav2_rviz_plugins/Navigation 2
+    Name: Navigation 2
 Visualization Manager:
   Class: ""
   Displays:
@@ -238,6 +241,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /initialpose
+    - Class: nav2_rviz_plugins/GoalTool
     - Class: rviz_default_plugins/SetGoal
       Topic:
         Depth: 5
