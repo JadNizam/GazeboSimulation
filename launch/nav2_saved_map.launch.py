@@ -26,7 +26,7 @@ def generate_launch_description():
 
     declare_map_yaml = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(pkg_dir, 'my_saved_map.yaml'),
+        default_value=os.path.join(pkg_dir, 'maps', 'my_saved_map.yaml'),
         description='Full path to map yaml file to load')
 
     # Launch Nav2 in Full Bringup Mode (Map Server + AMCL Localization + Navigation)
