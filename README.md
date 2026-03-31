@@ -1,128 +1,92 @@
-# Mars Rover Autonomous Navigation & Mapping
+# Autonomous Mars Rover Simulation: Exploration and Navigation Pipeline
 
-A comprehensive ROS 2 Jazzy and Gazebo Harmonic simulation featuring a rocker-bogie Mars rover traversing a realistic Mars-analog terrain. This project implements a complete robotics software stack, demonstrating hardware-bridged simulation, sensor fusion, SLAM-based mapping, and fully autonomous Nav2 waypoint navigation.
-
----
+A highly realistic ROS 2 and Gazebo simulation of a planetary rover capable of autonomous frontier exploration, simultaneous localization and mapping (SLAM), and multi-waypoint navigation. This project highlights a production-ready robotics software stack, transitioning from raw data acquisition in an unknown environment to reliable, mapped, and coordinated autonomous operations.
 
 ## Overview
 
-This repository serves as a testing environment for robotics perception and planning. It features a custom rocker-bogie rover integrated with live 2D LiDAR and IMU sensors dynamically interacting with a detailed simulated world. The project demonstrates a production-grade ROS 2 workflow, capturing an environment through real-time SLAM, saving the generated occupancy grid, and localizing the rover against that map to execute complex, obstacle-avoidant pathing using the Nav2 stack.
+This repository provides an end-to-end testing environment for autonomous robotics perception and planning. An equipped differential-drive rover interacts physically with a detailed simulated Mars research facility environment. The core focus is demonstrating a high-level autonomy pipeline: the rover can organically explore unknown spatial bounds utilizing frontier algorithms, generate and save high-resolution occupancy grids using LiDAR-based SLAM, and seamlessly relocalize against these maps to execute obstacle-avoidant multi-goal routes through the Nav2 architecture.
 
----
+## Key Capabilities
+
+*   **Autonomous Frontier Exploration**: The rover programmatically drives to the boundaries of known space, systematically expanding its map without human teleoperation intervention.
+*   **Simultaneous Localization and Mapping (SLAM)**: Real-time asynchronous processing of LiDAR point clouds and wheel odometry into 2D trinary occupancy grids.
+*   **Saved-Map Localization**: Robust usage of Adaptive Monte Carlo Localization (AMCL) to precisely place the rover within previously constrained and saved maps.
+*   **Multi-Goal / Waypoint Navigation**: Integration of the Nav2 waypoint follower node and RViz UI tooling, allowing the plotting and sequential execution of comprehensive, multi-destination patrol routes.
+*   **State Estimation**: Extended Kalman Filter (EKF) sensor fusion of IMU datastreams and skid-steer wheel odometry to anchor real-world tracking.
+*   **Detailed Simulation Mechanics**: Configured Gazebo Harmonic world featuring custom bounding perimeters, varied scientific outposts, scattered terrain, and precise physical friction constraints.
 
 ## System Architecture
 
-The robot's software stack mirrors a physical deployment, relying heavily on standard ROS 2 capabilities bridged seamlessly to Gazebo.
+The software structure closely models a physical hardware deployment, isolating abstraction layers for ease of tuning:
 
-### Simulation Engine
-- **Gazebo Harmonic**: Orchestrates physical interactions, planetary gravity constraints, multi-mesh collision handling, and sensor simulation.
-
-### Bridge Layer
-- **os_gz_bridge**: Handles bidirectional topic translation, mapping Gazebo hardware outputs (`/scan`, `/odom`, `/imu`, `/clock`) explicitly to their ROS 2 equivalents for real-time consumption.
-
-### State Estimation
-- **robot_localization**: Consumes raw wheel odometry and IMU data, routing through an Extended Kalman Filter (EKF) to produce a fused `/odometry/filtered` topic and the crucial `odom -> base_link` transform.
-
-### Perception & Mapping
-- **SLAM Toolbox**: Provides asynchronous mapping, consuming LiDAR scans to construct high-resolution trinary occupancy grids of the environment (`/map`).
-
-### Navigation & Localization
-- **Nav2 Stack**: Manages path planning (Navfn) and trajectory execution, utilizing AMCL (Adaptive Monte Carlo Localization) for fixed-map tracking over the map server.
-
----
-
-## Features & Capabilities
-
-- **Visual & Structural Simulation**: Functional rocker-bogie suspension models. Includes a detailed laboratory outcropping set against Mars-like planetary terrain capable of obstructing sensors.
-- **Real-time SLAM Mapping**: Launch a dedicated pipeline that seamlessly fuses LiDAR to plot unknown spatial constraints while you drive manually.
-- **Pre-computed Map Navigation (Saved-Map Workflow)**: A robust bringup sequence that loads an existing `.yaml/.pgm` occupancy grid, invokes AMCL for exact pose estimation, and executes paths while preserving accurate TF tree synchronization.
-- **Autonomous Path Execution**: Configurable `controller_server` output bridged tightly to the physical differential drive interface, translating global plans into reactive rover velocities (`/cmd_vel`).
-
----
-
-## Tech Stack
-
-- **ROS 2**: Jazzy Jalisco
-- **Gazebo**: Harmonic
-- **Core Packages**: `nav2_bringup`, `slam_toolbox`, `robot_localization`, `os_gz_sim`, `robot_state_publisher`
-- **Visualizer**: RViz2
-- **OS**: WSL 2 (Ubuntu/Windows integration) leveraging software rendering or discrete UI bridging.
-
----
+*   **Simulation Engine**: Gazebo Harmonic simulating physics, rigid body collisions, and lidar/IMU outputs.
+*   **Hardware Bridge**: 
+os_gz_bridge facilitating zero-latency synchronization of topics (/cmd_vel, /scan, /odom, /imu, /clock) between Gazebo formats and ROS 2 standard messages.
+*   **State Estimation Layer**: 
+obot_localization executing an EKF to yield a polished /odometry/filtered topic and accurate odom -> base_link TF transforms.
+*   **Perception Layer**: slam_toolbox handling topological spatial tracking during the exploration phase.
+*   **Navigation Stack**: 
+av2_bringup (Navigation 2) governing the global planner, local trajectory execution, costmap generations, and waypoint management.
+*   **Exploration Controller**: explore_lite (or custom frontier scripts) directing geometric boundary testing for independent world-mapping.
 
 ## Project Structure
 
-```
+`	ext
 GazeboSimulation/
-├── config/       # AMCL, Nav2 tuning, EKF, and RViz viewpoints
-├── launch/       # Modular Python launch sequences
-├── worlds/       # Detailed SDF environment definitions
-├── urdf/         # Robot description, collision geometry, and plugins
-├── scripts/      # Shell execution helpers
-├── my_saved_map.{pgm,yaml}  # Generated occupancy grids via map_saver_cli
-```
+├── archive/        # Legacy launch files, obsolete scripts, and deprecated URDFs
+├── config/         # System configuration tuning (Nav2, AMCL, RViz layouts, EKF, SLAM)
+├── launch/         # Core Python launch configurations for simulation and autonomy brings-ups
+├── maps/           # Saved topological output grids (.yaml / .pgm) generated from SLAM
+├── src/            # Custom standard ROS 2 packages and autonomy nodes
+├── urdf/           # Extensible URDF macros detailing links, joints, and physical limits
+└── worlds/         # 3D Gazebo Simulation Definitions (SDF) and world geometry
+`
 
----
+## Running the Autonomy Pipeline
 
-## How It Works: The Navigation Workflow
+The simulation can be operated sequentially through two separate launch ecosystems, showcasing the progression from mapping an unknown territory to navigating it.
 
-The typical lifecycle to utilize the rover's autonomy involves dual phases: Mapping the location, then navigating it.
+### Phase 1: Autonomous Frontier Exploration
 
-### 1. Mapping the Environment
-Initiate the mapping sequence:
-```bash
-ros2 launch launch/slam_mapping.launch.py
-```
-This single command spins up Gazebo, the hardware bridge, the EKF, SLAM Toolbox, and RViz. Drive the rover manually (e.g., using a teleop publisher to `/cmd_vel`). As the rover drives, the LiDAR scans aggregate into a growing map.
+To command the rover to automatically probe and map the 3D environment:
 
-### 2. Saving the Map
-Once the area has been fully mapped, invoke the map saver while respecting the simulation clock:
-```bash
-ros2 run nav2_map_server map_saver_cli -f my_saved_map --use_sim_time
-```
-This isolates the grid into serialized `.pgm` and `.yaml` formats.
+`ash
+ros2 launch launch/frontier_exploration.launch.py
+`
 
-### 3. Saved-Map Autonomous Navigation
-When returning to the project, launch the highly-tuned autonomous navigation stack. This sequence employs multi-stage timers to ensure the Gazebo clock initiates before Nav2 reads empty time states:
-```bash
+*This spins up the simulation, SLAM Toolbox, the frontier exploration node, and RViz. The rover will autonomously identify map boundaries and drive toward them to gather complete point-cloud data until the testing perimeter is fully plotted.*
+
+Once the environment is mapped to your satisfaction, save the map state to disk:
+
+`ash
+ros2 run nav2_map_server map_saver_cli -f maps/my_saved_map --use_sim_time
+`
+
+### Phase 2: Saved-Map Navigation & Waypoint Operation
+
+Once a map is generated and safely stored in the maps/ directory, utilize the Navigation 2 stack to execute intelligent routing.
+
+`ash
 ros2 launch launch/saved_map_navigation.launch.py
-```
+`
 
-#### In RViz:
-- Use the **2D Pose Estimate** tool to orient the rover's spawn location against the static map.
-- Use the **2D Goal Pose** tool to designate a coordinate destination.
+**Executing Navigation via RViz:**
+1.  **Initialize Localization**: Select the **2D Pose Estimate** tool from the upper toolbar and drag an arrow matching the rover's visual Gazebo spawn position to align the AMCL particle cloud.
+2.  **Toggle Waypoint Mode**: In the bottom-left **Navigation 2** panel, press the **Waypoint mode** button.
+3.  **Plot the Path**: Use the **Nav2 Goal** tool to place multiple destination arrows throughout the Mars laboratory map.
+4.  **Execute**: Click **Start Waypoint Following** on the Nav2 panel to send the rover along the queued path. 
 
-The global planner will compute a route around established obstacles, and the controller relay automatically dictates necessary velocity commands to manipulate the rover along the path.
+*For standard single-goal traversal, simply leave Waypoint mode unchecked and click any location natively on the map.*
 
----
+## Current Status
 
-## Current Working Status
-
-- **Gazebo Link**: Stable `/clock`, physics, and hardware plugins.
-- **Telemetry**: Teleop drive, IMU generation, and Wheel Odometry active.
-- **State Estimation**: EKF successfully publishing TF trees without timeline extrapolation faults.
-- **Mapping Phase**: SLAM seamlessly identifies boundaries.
-- **Localization Phase**: Map Server and AMCL configure pose alignments accurately.
-- **Execution**: Goal generation actively bridges to the drive plugin, culminating in true physical automation.
-
----
-
-## Requirements
-
-- ROS 2 Jazzy properly sourced.
-- Gazebo Harmonic installed.
-- Python 3 environment capable of evaluating the nested XML/URDF parsing configurations and executing launch commands.
-
----
+*   **Frontier Exploration**: Fully operational. Reliably bounds external outcropping. 
+*   **Static Mapping / SLAM**: Consistently parses dense, accurate boundary grids natively tied to the Gazebo simulation clock.
+*   **Nav2 Autonomy Stack**: Highly tuned global and local route planning parameters mitigating rover drift and stall faults.
+*   **Waypoint Framework**: The standard ROS 2 Nav2 toolkit is exposed to the RViz UI, completing the autonomous multi-goal patrol loop. 
 
 ## Future Improvements
 
-- **Enhanced Terrain Models**: Add more complex Mars-like terrains with varying slopes and obstacles.
-- **Multi-Robot Coordination**: Extend the simulation to include multiple rovers working collaboratively.
-- **Advanced Sensor Fusion**: Integrate additional sensors like stereo cameras or GPS for improved localization.
-
----
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
+*   **Terrain-Aware Costmaps**: Integrating 3D Pointcloud topography or RGB-D depth perception to influence navigation costs based on surface slope and rock clustering instead of utilizing strict 2D Lidar ray-tracing.
+*   **Battery & Mission Lifecycle Management**: Expanding the waypoint server to recognize logical docking routines at the solar outposts upon depletion of simulated resources.
+*   **Enhanced Dynamic Avoidance**: Injecting continuously moving physical obstacles within the test perimeter to challenge and calibrate local DWB critics.
