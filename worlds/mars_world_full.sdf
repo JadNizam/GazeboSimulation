@@ -263,35 +263,35 @@
     <!-- Low perimeter curb to keep exploration focused without blocking sightlines -->
     <model name="test_zone_boundary">
       <static>true</static>
-      <pose>2.0 1.5 0.3 0 0 0</pose>
+      <pose>2.0 1.5 0.75 0 0 0</pose>
       <link name="walls">
         <visual name="v_north">
-          <pose>0 10.0 0 0 0 0</pose><geometry><box><size>22.0 0.4 0.6</size></box></geometry>
+          <pose>0 10.0 0 0 0 0</pose><geometry><box><size>22.0 0.8 1.5</size></box></geometry>
           <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.45 1</diffuse></material>
         </visual>
         <collision name="c_north">
-          <pose>0 10.0 0 0 0 0</pose><geometry><box><size>22.0 0.4 1.5</size></box></geometry>
+          <pose>0 10.0 0 0 0 0</pose><geometry><box><size>22.0 0.8 1.5</size></box></geometry>
         </collision>
         <visual name="v_south">
-          <pose>0 -10.0 0 0 0 0</pose><geometry><box><size>22.0 0.4 0.6</size></box></geometry>
+          <pose>0 -10.0 0 0 0 0</pose><geometry><box><size>22.0 0.8 1.5</size></box></geometry>
           <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.45 1</diffuse></material>
         </visual>
         <collision name="c_south">
-          <pose>0 -10.0 0 0 0 0</pose><geometry><box><size>22.0 0.4 1.5</size></box></geometry>
+          <pose>0 -10.0 0 0 0 0</pose><geometry><box><size>22.0 0.8 1.5</size></box></geometry>
         </collision>
         <visual name="v_east">
-          <pose>11.0 0 0 0 0 0</pose><geometry><box><size>0.4 20.4 0.6</size></box></geometry>
+          <pose>11.0 0 0 0 0 0</pose><geometry><box><size>0.8 20.4 1.5</size></box></geometry>
           <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.45 1</diffuse></material>
         </visual>
         <collision name="c_east">
-          <pose>11.0 0 0 0 0 0</pose><geometry><box><size>0.4 20.4 1.5</size></box></geometry>
+          <pose>11.0 0 0 0 0 0</pose><geometry><box><size>0.8 20.4 1.5</size></box></geometry>
         </collision>
         <visual name="v_west">
-          <pose>-11.0 0 0 0 0 0</pose><geometry><box><size>0.4 20.4 0.6</size></box></geometry>
+          <pose>-11.0 0 0 0 0 0</pose><geometry><box><size>0.8 20.4 1.5</size></box></geometry>
           <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.45 1</diffuse></material>
         </visual>
         <collision name="c_west">
-          <pose>-11.0 0 0 0 0 0</pose><geometry><box><size>0.4 20.4 1.5</size></box></geometry>
+          <pose>-11.0 0 0 0 0 0</pose><geometry><box><size>0.8 20.4 1.5</size></box></geometry>
         </collision>
       </link>
     </model>
