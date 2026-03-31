@@ -259,25 +259,240 @@
     </model>
   
     
-    <model name="boulder_1">
-      <static>true</static><pose>2.5 1.5 -0.2 0.3 0.5 0.7</pose>
-      <link name="link"><collision name="c"><geometry><box><size>0.8 1.2 0.6</size></box></geometry></collision><visual name="v"><geometry><box><size>0.8 1.2 0.6</size></box></geometry><material><ambient>0.5 0.25 0.15 1</ambient><diffuse>0.55 0.28 0.18 1</diffuse></material></visual></link>
+    <!-- ================= CENTRAL TEST ZONE BOUNDARY ================= -->
+    <!-- Low perimeter curb to keep exploration focused without blocking sightlines -->
+    <model name="test_zone_boundary">
+      <static>true</static>
+      <pose>2.0 1.5 0.3 0 0 0</pose>
+      <link name="walls">
+        <visual name="v_north">
+          <pose>0 10.0 0 0 0 0</pose><geometry><box><size>22.0 0.4 0.6</size></box></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.45 1</diffuse></material>
+        </visual>
+        <collision name="c_north">
+          <pose>0 10.0 0 0 0 0</pose><geometry><box><size>22.0 0.4 1.5</size></box></geometry>
+        </collision>
+        <visual name="v_south">
+          <pose>0 -10.0 0 0 0 0</pose><geometry><box><size>22.0 0.4 0.6</size></box></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.45 1</diffuse></material>
+        </visual>
+        <collision name="c_south">
+          <pose>0 -10.0 0 0 0 0</pose><geometry><box><size>22.0 0.4 1.5</size></box></geometry>
+        </collision>
+        <visual name="v_east">
+          <pose>11.0 0 0 0 0 0</pose><geometry><box><size>0.4 20.4 0.6</size></box></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.45 1</diffuse></material>
+        </visual>
+        <collision name="c_east">
+          <pose>11.0 0 0 0 0 0</pose><geometry><box><size>0.4 20.4 1.5</size></box></geometry>
+        </collision>
+        <visual name="v_west">
+          <pose>-11.0 0 0 0 0 0</pose><geometry><box><size>0.4 20.4 0.6</size></box></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.45 1</diffuse></material>
+        </visual>
+        <collision name="c_west">
+          <pose>-11.0 0 0 0 0 0</pose><geometry><box><size>0.4 20.4 1.5</size></box></geometry>
+        </collision>
+      </link>
     </model>
-    <model name="boulder_2">
-      <static>true</static><pose>1.5 -1.0 -0.4 0.1 -0.4 1.2</pose>
-      <link name="link"><collision name="c"><geometry><box><size>1.5 0.9 0.8</size></box></geometry></collision><visual name="v"><geometry><box><size>1.5 0.9 0.8</size></box></geometry><material><ambient>0.45 0.22 0.12 1</ambient><diffuse>0.5 0.24 0.14 1</diffuse></material></visual></link>
-    </model>
-    <model name="boulder_3">
-      <static>true</static><pose>-2.0 2.5 -0.3 -0.2 0.6 0.1</pose>
-      <link name="link"><collision name="c"><geometry><box><size>1.0 1.0 0.9</size></box></geometry></collision><visual name="v"><geometry><box><size>1.0 1.0 0.9</size></box></geometry><material><ambient>0.52 0.26 0.16 1</ambient><diffuse>0.58 0.30 0.20 1</diffuse></material></visual></link>
-    </model>
-    
 
-  
-    
-    
-    <!-- ================= LAB ADDITIONS ================= -->
-    <!-- Staging / Staging Pad for Rover -->
+    <!-- ================= RICH OUTER ENVIRONMENT (MARS RESEARCH SITE) ================= -->
+    <!-- Distant Rock Formations -->
+    <model name="rock_formation_north">
+      <static>true</static><pose>8.0 22.0 -0.5 0.1 0.2 0.5</pose>
+      <link name="link">
+        <collision name="c1"><geometry><box><size>6 4 3</size></box></geometry></collision>
+        <visual name="v1"><geometry><box><size>6 4 3</size></box></geometry><material><ambient>0.6 0.35 0.25 1</ambient><diffuse>0.65 0.38 0.28 1</diffuse></material></visual>
+        <collision name="c2"><pose>3 -2 0 0 0 -0.4</pose><geometry><box><size>4 3 2</size></box></geometry></collision>
+        <visual name="v2"><pose>3 -2 0 0 0 -0.4</pose><geometry><box><size>4 3 2</size></box></geometry><material><ambient>0.55 0.32 0.22 1</ambient><diffuse>0.6 0.34 0.24 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="rock_formation_east">
+      <static>true</static><pose>24.0 2.0 -1.0 -0.1 0.3 -0.6</pose>
+      <link name="link">
+        <collision name="c1"><geometry><box><size>5 8 4</size></box></geometry></collision>
+        <visual name="v1"><geometry><box><size>5 8 4</size></box></geometry><material><ambient>0.58 0.34 0.24 1</ambient><diffuse>0.62 0.37 0.27 1</diffuse></material></visual>
+        <collision name="c2"><pose>-2 4 0.5 0.2 0 0.8</pose><geometry><box><size>3 4 2.5</size></box></geometry></collision>
+        <visual name="v2"><pose>-2 4 0.5 0.2 0 0.8</pose><geometry><box><size>3 4 2.5</size></box></geometry><material><ambient>0.62 0.36 0.26 1</ambient><diffuse>0.68 0.40 0.30 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="rock_formation_south">
+      <static>true</static><pose>-10.0 -23.0 -0.5 0.2 -0.1 1.2</pose>
+      <link name="link">
+        <collision name="c1"><geometry><box><size>8 5 3.5</size></box></geometry></collision>
+        <visual name="v1"><geometry><box><size>8 5 3.5</size></box></geometry><material><ambient>0.55 0.32 0.22 1</ambient><diffuse>0.6 0.34 0.24 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- Mars Research Outpost Structures -->
+    <model name="research_hab_dome">
+      <static>true</static><pose>-22.0 12.0 0 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><pose>0 0 2 0 0 0</pose><geometry><cylinder><radius>4.5</radius><length>4</length></cylinder></geometry></collision>
+        <visual name="v"><pose>0 0 2 0 0 0</pose><geometry><cylinder><radius>4.5</radius><length>4</length></cylinder></geometry>
+          <material><ambient>0.85 0.85 0.9 1</ambient><diffuse>0.9 0.9 0.95 1</diffuse></material>
+        </visual>
+        <!-- airlock -->
+        <visual name="v_airlock"><pose>4.5 0 1.5 0 0 0</pose><geometry><box><size>2 2 3</size></box></geometry>
+          <material><ambient>0.7 0.7 0.7 1</ambient><diffuse>0.75 0.75 0.75 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="solar_array_1">
+      <static>true</static><pose>-22.0 -2.0 1.0 0 0 0</pose>
+      <link name="link">
+        <visual name="panel1"><pose>0 3 0 0 -0.5 0</pose><geometry><box><size>2 4 0.1</size></box></geometry>
+          <material><ambient>0.1 0.2 0.4 1</ambient><diffuse>0.15 0.25 0.45 1</diffuse></material>
+        </visual>
+        <visual name="support1"><pose>0 3 -0.5 0 0 0</pose><geometry><cylinder><radius>0.1</radius><length>1</length></cylinder></geometry>
+          <material><ambient>0.5 0.5 0.5 1</ambient></material>
+        </visual>
+        <visual name="panel2"><pose>0 -3 0 0 -0.5 0</pose><geometry><box><size>2 4 0.1</size></box></geometry>
+          <material><ambient>0.1 0.2 0.4 1</ambient><diffuse>0.15 0.25 0.45 1</diffuse></material>
+        </visual>
+        <visual name="support2"><pose>0 -3 -0.5 0 0 0</pose><geometry><cylinder><radius>0.1</radius><length>1</length></cylinder></geometry>
+          <material><ambient>0.5 0.5 0.5 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="solar_array_2">
+      <static>true</static><pose>-22.0 -10.0 1.0 0 0 0</pose>
+      <link name="link">
+        <visual name="panel1"><pose>0 3 0 0 -0.5 0</pose><geometry><box><size>2 4 0.1</size></box></geometry>
+          <material><ambient>0.1 0.2 0.4 1</ambient><diffuse>0.15 0.25 0.45 1</diffuse></material>
+        </visual>
+        <visual name="support1"><pose>0 3 -0.5 0 0 0</pose><geometry><cylinder><radius>0.1</radius><length>1</length></cylinder></geometry>
+          <material><ambient>0.5 0.5 0.5 1</ambient></material>
+        </visual>
+        <visual name="panel2"><pose>0 -3 0 0 -0.5 0</pose><geometry><box><size>2 4 0.1</size></box></geometry>
+          <material><ambient>0.1 0.2 0.4 1</ambient><diffuse>0.15 0.25 0.45 1</diffuse></material>
+        </visual>
+        <visual name="support2"><pose>0 -3 -0.5 0 0 0</pose><geometry><cylinder><radius>0.1</radius><length>1</length></cylinder></geometry>
+          <material><ambient>0.5 0.5 0.5 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="solar_array_3">
+      <static>true</static><pose>-18.0 -6.0 1.0 0 0 0</pose>
+      <link name="link">
+        <visual name="panel1"><pose>0 3 0 0 -0.5 0</pose><geometry><box><size>2 4 0.1</size></box></geometry>
+          <material><ambient>0.1 0.2 0.4 1</ambient><diffuse>0.15 0.25 0.45 1</diffuse></material>
+        </visual>
+        <visual name="support1"><pose>0 3 -0.5 0 0 0</pose><geometry><cylinder><radius>0.1</radius><length>1</length></cylinder></geometry>
+          <material><ambient>0.5 0.5 0.5 1</ambient></material>
+        </visual>
+        <visual name="panel2"><pose>0 -3 0 0 -0.5 0</pose><geometry><box><size>2 4 0.1</size></box></geometry>
+          <material><ambient>0.1 0.2 0.4 1</ambient><diffuse>0.15 0.25 0.45 1</diffuse></material>
+        </visual>
+        <visual name="support2"><pose>0 -3 -0.5 0 0 0</pose><geometry><cylinder><radius>0.1</radius><length>1</length></cylinder></geometry>
+          <material><ambient>0.5 0.5 0.5 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Lab Science Equipment Station -->
+    <model name="science_station">
+      <static>true</static><pose>15.0 5.0 0.5 0 0 0.4</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>3 1.5 1</size></box></geometry></collision>
+        <visual name="v_desk"><geometry><box><size>3 1.5 1</size></box></geometry>
+          <material><ambient>0.7 0.7 0.75 1</ambient><diffuse>0.8 0.8 0.85 1</diffuse></material>
+        </visual>
+        <visual name="v_equipment1"><pose>-1 0 0.7 0 0 0</pose><geometry><cylinder><radius>0.4</radius><length>0.4</length></cylinder></geometry>
+          <material><ambient>0.2 0.6 0.8 1</ambient></material>
+        </visual>
+        <visual name="v_equipment2"><pose>0.5 0 0.8 0 0 0</pose><geometry><box><size>0.8 0.8 0.6</size></box></geometry>
+          <material><ambient>0.8 0.3 0.2 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="comm_tower">
+      <static>true</static><pose>18.0 -18.0 0 0 0 0</pose>
+      <link name="link">
+        <collision name="base"><pose>0 0 1 0 0 0</pose><geometry><box><size>2 2 2</size></box></geometry></collision>
+        <visual name="v_base"><pose>0 0 1 0 0 0</pose><geometry><box><size>2 2 2</size></box></geometry>
+          <material><ambient>0.6 0.6 0.6 1</ambient></material>
+        </visual>
+        <visual name="v_mast"><pose>0 0 5 0 0 0</pose><geometry><cylinder><radius>0.15</radius><length>8</length></cylinder></geometry>
+          <material><ambient>0.8 0.8 0.8 1</ambient></material>
+        </visual>
+        <visual name="v_dish"><pose>0 0 8 0 1.2 0.5</pose><geometry><cylinder><radius>1.5</radius><length>0.2</length></cylinder></geometry>
+          <material><ambient>0.9 0.9 0.9 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Scattered Mid-range Boulders -->
+    <model name="mid_boulder_1"><static>true</static><pose>-12.0 15.0 -0.2 0.3 0.5 0.7</pose><link name="link"><visual name="v"><geometry><box><size>2.0 2.2 1.6</size></box></geometry><material><ambient>0.6 0.35 0.25 1</ambient><diffuse>0.65 0.38 0.28 1</diffuse></material></visual></link></model>
+    <model name="mid_boulder_2"><static>true</static><pose>14.0 -10.0 -0.3 -0.2 0.6 0.1</pose><link name="link"><visual name="v"><geometry><box><size>2.5 1.5 1.2</size></box></geometry><material><ambient>0.52 0.26 0.16 1</ambient><diffuse>0.58 0.30 0.20 1</diffuse></material></visual></link></model>
+    <model name="mid_boulder_3"><static>true</static><pose>10.0 12.0 -0.4 0.1 -0.4 1.2</pose><link name="link"><visual name="v"><geometry><box><size>1.8 2.0 1.4</size></box></geometry><material><ambient>0.55 0.32 0.22 1</ambient><diffuse>0.6 0.34 0.24 1</diffuse></material></visual></link></model>
+
+    <!-- Communication Relay Small -->
+    <model name="comm_relay_small">
+      <static>true</static><pose>9.0 -16.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="v_base"><geometry><cylinder><radius>1.0</radius><length>1</length></cylinder></geometry>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+        <visual name="v_mast"><pose>0 0 2 0 0 0</pose><geometry><cylinder><radius>0.08</radius><length>3</length></cylinder></geometry>
+          <material><ambient>0.9 0.9 0.9 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Additional Scattered Rocks and Boulders -->
+    <model name="extra_boulder_1"><static>true</static><pose>-16.0 -18.0 -0.4 0.2 -0.3 0.5</pose><link name="link"><visual name="v"><geometry><box><size>3.5 1.8 2.2</size></box></geometry><material><ambient>0.62 0.35 0.22 1</ambient><diffuse>0.66 0.38 0.25 1</diffuse></material></visual></link></model>
+    <model name="extra_boulder_2"><static>true</static><pose>-18.0 20.0 -0.5 0.1 0.4 1.1</pose><link name="link"><visual name="v"><geometry><box><size>2.8 3.5 2.0</size></box></geometry><material><ambient>0.58 0.32 0.20 1</ambient><diffuse>0.62 0.35 0.23 1</diffuse></material></visual></link></model>
+    <model name="extra_boulder_3"><static>true</static><pose>20.0 18.0 -0.2 -0.2 0.1 0.8</pose><link name="link"><visual name="v"><geometry><box><size>1.5 2.2 1.2</size></box></geometry><material><ambient>0.55 0.30 0.20 1</ambient><diffuse>0.60 0.33 0.22 1</diffuse></material></visual></link></model>
+    <model name="extra_boulder_4"><static>true</static><pose>16.0 -22.0 -0.3 0.4 -0.1 0.2</pose><link name="link"><visual name="v"><geometry><box><size>2.2 1.5 1.8</size></box></geometry><material><ambient>0.60 0.34 0.24 1</ambient><diffuse>0.65 0.36 0.26 1</diffuse></material></visual></link></model>
+
+    <!-- Outpost Supply Crates -->
+    <model name="supply_crates">
+      <static>true</static><pose>13.0 15.0 0.5 0 0 0.3</pose>
+      <link name="link">
+        <collision name="c1"><pose>0 0 0 0 0 0</pose><geometry><box><size>1.5 1.0 1.0</size></box></geometry></collision>
+        <visual name="v1"><pose>0 0 0 0 0 0</pose><geometry><box><size>1.5 1.0 1.0</size></box></geometry><material><ambient>0.7 0.6 0.5 1</ambient><diffuse>0.75 0.65 0.55 1</diffuse></material></visual>
+        <collision name="c2"><pose>0.2 1.2 0 0 0 -0.2</pose><geometry><box><size>1.2 1.2 1.0</size></box></geometry></collision>
+        <visual name="v2"><pose>0.2 1.2 0 0 0 -0.2</pose><geometry><box><size>1.2 1.2 1.0</size></box></geometry><material><ambient>0.4 0.5 0.6 1</ambient><diffuse>0.45 0.55 0.65 1</diffuse></material></visual>
+        <collision name="c3"><pose>-0.2 0.5 1.0 0 0 0.1</pose><geometry><box><size>1.0 0.8 1.0</size></box></geometry></collision>
+        <visual name="v3"><pose>-0.2 0.5 1.0 0 0 0.1</pose><geometry><box><size>1.0 0.8 1.0</size></box></geometry><material><ambient>0.6 0.6 0.6 1</ambient><diffuse>0.65 0.65 0.65 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- Subsurface Drill Rig -->
+    <model name="drill_rig">
+      <static>true</static><pose>-14.0 -8.0 2.0 0 0 -0.5</pose>
+      <link name="link">
+        <visual name="v_base"><pose>0 0 -1.5 0 0 0</pose><geometry><box><size>2.0 2.0 1.0</size></box></geometry>
+          <material><ambient>0.8 0.4 0.1 1</ambient><diffuse>0.85 0.45 0.15 1</diffuse></material>
+        </visual>
+        <visual name="v_tower"><pose>0 0 1.0 0 0 0</pose><geometry><box><size>0.4 0.4 4.0</size></box></geometry>
+          <material><ambient>0.2 0.2 0.2 1</ambient><diffuse>0.3 0.3 0.3 1</diffuse></material>
+        </visual>
+        <visual name="v_drill"><pose>0 0 -0.5 0 0 0</pose><geometry><cylinder><radius>0.1</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0.5 0.5 0.5 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Additional Sensor Tripod -->
+    <model name="sensor_tripod">
+      <static>true</static><pose>18.0 8.0 0.5 0 0 0.2</pose>
+      <link name="link">
+        <visual name="leg1"><pose>0.5 0.5 -0.2 0 -0.5 -0.785</pose><geometry><cylinder><radius>0.05</radius><length>1.5</length></cylinder></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+        <visual name="leg2"><pose>-0.5 0.5 -0.2 0 -0.5 0.785</pose><geometry><cylinder><radius>0.05</radius><length>1.5</length></cylinder></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+        <visual name="leg3"><pose>0 -0.6 -0.2 -0.5 0 0</pose><geometry><cylinder><radius>0.05</radius><length>1.5</length></cylinder></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+        <visual name="sensor_head"><pose>0 0 0.5 0 0 0</pose><geometry><sphere><radius>0.3</radius></sphere></geometry><material><ambient>0.8 0.8 0.9 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <!-- Center Staging Pad -->
     <model name="staging_pad">
       <static>true</static>
       <pose>0 0 0.005 0 0 0</pose>
@@ -285,63 +500,13 @@
         <visual name="pad_vis">
           <geometry><box><size>6 6 0.01</size></box></geometry>
           <material>
-            <ambient>0.7 0.7 0.75 1.0</ambient>
-            <diffuse>0.8 0.8 0.85 1.0</diffuse>
-            <specular>0.2 0.2 0.2 1.0</specular>
+            <ambient>0.15 0.15 0.18 1.0</ambient>
+            <diffuse>0.2 0.2 0.25 1.0</diffuse>
+            <specular>0.1 0.1 0.1 1.0</specular>
           </material>
         </visual>
       </link>
     </model>
 
-    <!-- Center Caution Line (Visual only) -->
-    <model name="caution_line">
-      <static>true</static>
-      <pose>5 0 0.006 0 0 0</pose>
-      <link name="line_link">
-        <visual name="line_vis">
-          <geometry><box><size>10 0.2 0.01</size></box></geometry>
-          <material>
-            <ambient>0.8 0.6 0.0 1.0</ambient>
-            <diffuse>0.9 0.7 0.1 1.0</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
-
-    <!-- Test Facility Outer Perimeter Fencing -->
-    <model name="facility_perimeter">
-      <static>true</static>
-      <pose>0 0 1.0 0 0 0</pose>
-      <link name="walls">
-        <visual name="v_north">
-          <pose>0 15 0 0 0 0</pose><geometry><box><size>30 0.5 2</size></box></geometry>
-          <material><ambient>0.2 0.2 0.25 1</ambient><diffuse>0.3 0.3 0.35 1</diffuse></material>
-        </visual>
-        <collision name="c_north">
-          <pose>0 15 0 0 0 0</pose><geometry><box><size>30 0.5 2</size></box></geometry>
-        </collision>
-        <visual name="v_south">
-          <pose>0 -15 0 0 0 0</pose><geometry><box><size>30 0.5 2</size></box></geometry>
-          <material><ambient>0.2 0.2 0.25 1</ambient><diffuse>0.3 0.3 0.35 1</diffuse></material>
-        </visual>
-        <collision name="c_south">
-          <pose>0 -15 0 0 0 0</pose><geometry><box><size>30 0.5 2</size></box></geometry>
-        </collision>
-        <visual name="v_east">
-          <pose>15 0 0 0 0 0</pose><geometry><box><size>0.5 30 2</size></box></geometry>
-          <material><ambient>0.2 0.2 0.25 1</ambient><diffuse>0.3 0.3 0.35 1</diffuse></material>
-        </visual>
-        <collision name="c_east">
-          <pose>15 0 0 0 0 0</pose><geometry><box><size>0.5 30 2</size></box></geometry>
-        </collision>
-        <visual name="v_west">
-          <pose>-15 0 0 0 0 0</pose><geometry><box><size>0.5 30 2</size></box></geometry>
-          <material><ambient>0.2 0.2 0.25 1</ambient><diffuse>0.3 0.3 0.35 1</diffuse></material>
-        </visual>
-        <collision name="c_west">
-          <pose>-15 0 0 0 0 0</pose><geometry><box><size>0.5 30 2</size></box></geometry>
-        </collision>
-      </link>
-    </model>
     </world>
 </sdf>
