@@ -249,15 +249,9 @@
       <static>true</static>
       <pose>10 5 1 0 0 3.14159</pose>
       <link name="link">
-        <collision name="c_back"><pose>0 2 0 0 0 0</pose><geometry><box><size>4 0.2 2</size></box></geometry></collision>
-        <collision name="c_left"><pose>-2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry></collision>
-        <collision name="c_right"><pose>2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry></collision>
-        <visual name="v_back"><pose>0 2 0 0 0 0</pose><geometry><box><size>4 0.2 2</size></box></geometry><material><ambient>0.6 0.7 0.8 1</ambient><diffuse>0.65 0.75 0.85 1</diffuse></material></visual>
-        <visual name="v_left"><pose>-2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.6 0.7 0.8 1</ambient><diffuse>0.65 0.75 0.85 1</diffuse></material></visual>
-        <visual name="v_right"><pose>2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry><material><ambient>0.6 0.7 0.8 1</ambient><diffuse>0.65 0.75 0.85 1</diffuse></material></visual>
-      </link>
-    </model>
-  
+          <collision name="c_back"><pose>-0.3 2 0 0 0 0</pose><geometry><box><size>4.6 0.2 2</size></box></geometry></collision>
+          <collision name="c_right"><pose>2 0 0 0 0 0</pose><geometry><box><size>0.2 4 2</size></box></geometry></collision>
+          <visual name="v_back"><pose>-0.3 2 0 0 0 0</pose><geometry><box><size>4.6 0.2 2</size></box></geometry><material><ambient>0.6 0.7 0.8 1</ambient><diffuse>0.65 0.75 0.85 1</diffuse></material></visual>
     
     <!-- ================= CENTRAL TEST ZONE BOUNDARY ================= -->
     <!-- Low perimeter curb to keep exploration focused without blocking sightlines -->
