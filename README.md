@@ -59,7 +59,7 @@ ros2 launch launch/frontier_exploration.launch.py
 Once the environment is mapped to your satisfaction, save the map state to disk:
 
 `ash
-ros2 run nav2_map_server map_saver_cli -f maps/my_saved_map --use_sim_time
+ros2 run nav2_map_server map_saver_cli -f maps/my_saved_map --ros-args -p use_sim_time:=true
 `
 
 ### Phase 2: Saved-Map Navigation & Waypoint Operation
