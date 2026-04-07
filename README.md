@@ -31,17 +31,17 @@ av2_bringup (Navigation 2) governing the global planner, local trajectory execut
 
 ## Project Structure
 
-`	ext
+
+```text
 GazeboSimulation/
 ├── archive/        # Legacy launch files, obsolete scripts, and deprecated URDFs
 ├── config/         # System configuration tuning (Nav2, AMCL, RViz layouts, EKF, SLAM)
-├── launch/         # Core Python launch configurations for simulation and autonomy brings-ups
+├── launch/         # Core Python launch configurations for simulation and autonomy bring-ups
 ├── maps/           # Saved topological output grids (.yaml / .pgm) generated from SLAM
 ├── src/            # Custom standard ROS 2 packages and autonomy nodes
 ├── urdf/           # Extensible URDF macros detailing links, joints, and physical limits
 └── worlds/         # 3D Gazebo Simulation Definitions (SDF) and world geometry
-`
-
+```
 ## Running the Autonomy Pipeline
 
 The simulation can be operated sequentially through two separate launch ecosystems, showcasing the progression from mapping an unknown territory to navigating it.
@@ -50,7 +50,8 @@ The simulation can be operated sequentially through two separate launch ecosyste
 
 To command the rover to automatically probe and map the 3D environment:
 
-`ash
+`
+bash
 ros2 launch launch/frontier_exploration.launch.py
 `
 
@@ -58,7 +59,8 @@ ros2 launch launch/frontier_exploration.launch.py
 
 Once the environment is mapped to your satisfaction, save the map state to disk:
 
-`ash
+`
+bash
 ros2 run nav2_map_server map_saver_cli -f maps/my_saved_map --ros-args -p use_sim_time:=true
 `
 
@@ -66,7 +68,8 @@ ros2 run nav2_map_server map_saver_cli -f maps/my_saved_map --ros-args -p use_si
 
 Once a map is generated and safely stored in the maps/ directory, utilize the Navigation 2 stack to execute intelligent routing.
 
-`ash
+`
+bash
 ros2 launch launch/saved_map_navigation.launch.py
 `
 
